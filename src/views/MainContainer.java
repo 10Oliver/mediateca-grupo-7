@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package views;
+
 import javax.swing.JLabel;
 
-import views.*;
+import views.MaterialOptions;
 
 /**
  *
@@ -19,6 +20,16 @@ public class MainContainer extends javax.swing.JFrame {
      */
     public MainContainer() {
         initComponents();
+    }
+
+    private void showMaterialOptions(int viewType) {
+        MaterialOptions material = new MaterialOptions(viewType, pnlMainPanel);
+        material.setSize(1024, 720);
+        material.setVisible(true);
+        pnlMainPanel.removeAll();
+        pnlMainPanel.add(material);
+        pnlMainPanel.revalidate();
+        pnlMainPanel.repaint();
     }
 
     /**
@@ -162,53 +173,23 @@ public class MainContainer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        AddMaterial addMaterial = new AddMaterial();
-        addMaterial.setSize(1024,720);
-        addMaterial.setVisible(true);
-        pnlMainPanel.removeAll();
-        pnlMainPanel.add(addMaterial);
-        pnlMainPanel.revalidate();
-        pnlMainPanel.repaint();
+        this.showMaterialOptions(1);
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnModifyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModifyMouseClicked
-        ModifyMaterial modifyMaterial = new ModifyMaterial();
-        modifyMaterial.setSize(1024,720);
-        modifyMaterial.setVisible(true);
-        pnlMainPanel.removeAll();
-        pnlMainPanel.add(modifyMaterial);
-        pnlMainPanel.revalidate();
-        pnlMainPanel.repaint();
+        this.showMaterialOptions(2);
     }//GEN-LAST:event_btnModifyMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        DeleteMaterial deleteMaterial = new DeleteMaterial();
-        deleteMaterial.setSize(1024,720);
-        deleteMaterial.setVisible(true);
-        pnlMainPanel.removeAll();
-        pnlMainPanel.add(deleteMaterial);
-        pnlMainPanel.revalidate();
-        pnlMainPanel.repaint();
+        this.showMaterialOptions(3);
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
-        SearchMaterial searchMaterial = new SearchMaterial();
-        searchMaterial.setSize(1024,720);
-        searchMaterial.setVisible(true);
-        pnlMainPanel.removeAll();
-        pnlMainPanel.add(searchMaterial);
-        pnlMainPanel.revalidate();
-        pnlMainPanel.repaint();
+        this.showMaterialOptions(4);
     }//GEN-LAST:event_btnSearchMouseClicked
 
     private void btnListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListMouseClicked
-        ListMaterial listMaterial = new ListMaterial();
-        listMaterial.setSize(1024,720);
-        listMaterial.setVisible(true);
-        pnlMainPanel.removeAll();
-        pnlMainPanel.add(listMaterial);
-        pnlMainPanel.revalidate();
-        pnlMainPanel.repaint();
+        this.showMaterialOptions(5);
     }//GEN-LAST:event_btnListMouseClicked
 
     /**
