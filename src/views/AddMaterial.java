@@ -10,11 +10,13 @@ package views;
  * @author Oliver
  */
 public class AddMaterial extends javax.swing.JPanel {
+    private int material;
 
     /**
      * Creates new form AddMaterial
      */
-    public AddMaterial() {
+    public AddMaterial(int materialOption) {
+        this.material = materialOption;
         initComponents();
     }
 
@@ -39,16 +41,16 @@ public class AddMaterial extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
+                .addGap(407, 407, 407)
                 .addComponent(lblTitle)
-                .addContainerGap(782, Short.MAX_VALUE))
+                .addContainerGap(520, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+                .addGap(137, 137, 137)
                 .addComponent(lblTitle)
-                .addContainerGap(565, Short.MAX_VALUE))
+                .addContainerGap(567, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

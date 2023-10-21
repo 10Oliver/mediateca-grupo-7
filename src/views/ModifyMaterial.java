@@ -10,11 +10,13 @@ package views;
  * @author Oliver
  */
 public class ModifyMaterial extends javax.swing.JPanel {
+    private int material;
 
     /**
      * Creates new form ModifyMaterial
      */
-    public ModifyMaterial() {
+    public ModifyMaterial(int materialOption) {
+        this.material = materialOption;
         initComponents();
     }
 
@@ -30,6 +32,8 @@ public class ModifyMaterial extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(230, 240, 240));
+        setMinimumSize(new java.awt.Dimension(1024, 720));
+        setPreferredSize(new java.awt.Dimension(1024, 720));
 
         jLabel1.setText("Modificar material");
 
@@ -37,17 +41,17 @@ public class ModifyMaterial extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(436, 436, 436)
                 .addComponent(jLabel1)
-                .addGap(166, 166, 166))
+                .addContainerGap(485, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
+                .addGap(77, 77, 77)
                 .addComponent(jLabel1)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(627, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

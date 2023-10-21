@@ -10,11 +10,13 @@ package views;
  * @author Oliver
  */
 public class ListMaterial extends javax.swing.JPanel {
+    private int material;
 
     /**
      * Creates new form ListMaterial
      */
-    public ListMaterial() {
+    public ListMaterial(int materialOption) {
+        this.material = materialOption;
         initComponents();
     }
 
@@ -29,6 +31,9 @@ public class ListMaterial extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(1024, 720));
+        setPreferredSize(new java.awt.Dimension(1024, 720));
+
         jLabel1.setText("Listar material");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -36,16 +41,16 @@ public class ListMaterial extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
+                .addGap(435, 435, 435)
                 .addComponent(jLabel1)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(507, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addGap(66, 66, 66)
                 .addComponent(jLabel1)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(638, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

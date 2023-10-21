@@ -10,11 +10,13 @@ package views;
  * @author Oliver
  */
 public class SearchMaterial extends javax.swing.JPanel {
+    private int material;
 
     /**
      * Creates new form SearchMaterial
      */
-    public SearchMaterial() {
+    public SearchMaterial(int materialOption) {
+        this.material = materialOption;
         initComponents();
     }
 
@@ -30,6 +32,8 @@ public class SearchMaterial extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(230, 230, 240));
+        setMinimumSize(new java.awt.Dimension(1024, 720));
+        setPreferredSize(new java.awt.Dimension(1024, 720));
 
         jLabel1.setText("Buscar material");
 
@@ -40,14 +44,14 @@ public class SearchMaterial extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(127, 127, 127)
                 .addComponent(jLabel1)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(808, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(142, 142, 142)
                 .addComponent(jLabel1)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(562, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

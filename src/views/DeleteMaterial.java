@@ -10,11 +10,13 @@ package views;
  * @author Oliver
  */
 public class DeleteMaterial extends javax.swing.JPanel {
+    private int material;
 
     /**
      * Creates new form DeleteMaterial
      */
-    public DeleteMaterial() {
+    public DeleteMaterial(int materialOption) {
+        this.material = materialOption;
         initComponents();
     }
 
@@ -30,6 +32,8 @@ public class DeleteMaterial extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(240, 240, 230));
+        setMinimumSize(new java.awt.Dimension(1024, 720));
+        setPreferredSize(new java.awt.Dimension(1024, 720));
 
         jLabel1.setText("Eliminar material");
 
@@ -37,17 +41,17 @@ public class DeleteMaterial extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(489, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGap(438, 438, 438))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(188, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(114, 114, 114)
                 .addComponent(jLabel1)
-                .addGap(96, 96, 96))
+                .addContainerGap(590, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

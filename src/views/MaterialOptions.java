@@ -29,32 +29,32 @@ public class MaterialOptions extends javax.swing.JPanel {
         System.out.println(this.viewOption);
         switch(this.viewOption){
             case 1:
-                AddMaterial addMaterial = new AddMaterial();
+                AddMaterial addMaterial = new AddMaterial(materialChoose);
                 addMaterial.setSize(1024, 720);
                 addMaterial.setVisible(true);
                 mainPanel.add(addMaterial);
                 break;
             // Modify material
             case 2:
-                ModifyMaterial modifyMaterial = new ModifyMaterial();
+                ModifyMaterial modifyMaterial = new ModifyMaterial(materialChoose);
                 modifyMaterial.setSize(1024, 720);
                 mainPanel.add(modifyMaterial);
                 break;
             // Delete material
             case 3:
-                DeleteMaterial deleteMaterial = new DeleteMaterial();
+                DeleteMaterial deleteMaterial = new DeleteMaterial(materialChoose);
                 deleteMaterial.setSize(1024, 720);
                 mainPanel.add(deleteMaterial);
                 break;
             // Search material
             case 4:
-                SearchMaterial searchMaterial = new SearchMaterial();
+                SearchMaterial searchMaterial = new SearchMaterial(materialChoose);
                 searchMaterial.setSize(1024, 720);
                 mainPanel.add(searchMaterial);
                 break;
             // List material
             case 5:
-                ListMaterial listMaterial = new ListMaterial();
+                ListMaterial listMaterial = new ListMaterial(materialChoose);
                 listMaterial.setSize(1024, 720);
                 mainPanel.add(listMaterial);
                 break;
