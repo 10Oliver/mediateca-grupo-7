@@ -10,6 +10,7 @@ package views;
  * @author Oliver
  */
 public class ListMaterial extends javax.swing.JPanel {
+
     private int material;
 
     /**
@@ -18,6 +19,21 @@ public class ListMaterial extends javax.swing.JPanel {
     public ListMaterial(int materialOption) {
         this.material = materialOption;
         initComponents();
+        // Delete this when you start working
+        switch (this.material) {
+            case 1:
+                lblMaterial.setText("Material seleccionado: Libro");
+                break;
+            case 2:
+                lblMaterial.setText("Material seleccionado: Revista");
+                break;
+            case 3:
+                lblMaterial.setText("Material seleccionado: CD");
+                break;
+            case 4:
+                lblMaterial.setText("Material seleccionado: DVD");
+                break;
+        }
     }
 
     /**
@@ -30,32 +46,43 @@ public class ListMaterial extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        lblMaterial = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1024, 720));
         setPreferredSize(new java.awt.Dimension(1024, 720));
 
         jLabel1.setText("Listar material");
 
+        lblMaterial.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(435, 435, 435)
-                .addComponent(jLabel1)
-                .addContainerGap(507, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(435, 435, 435)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(491, 491, 491)
+                        .addComponent(lblMaterial)))
+                .addContainerGap(492, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jLabel1)
-                .addContainerGap(638, Short.MAX_VALUE))
+                .addGap(122, 122, 122)
+                .addComponent(lblMaterial)
+                .addContainerGap(500, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblMaterial;
     // End of variables declaration//GEN-END:variables
 }

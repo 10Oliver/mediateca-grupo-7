@@ -10,6 +10,7 @@ package views;
  * @author Oliver
  */
 public class DeleteMaterial extends javax.swing.JPanel {
+
     private int material;
 
     /**
@@ -18,6 +19,21 @@ public class DeleteMaterial extends javax.swing.JPanel {
     public DeleteMaterial(int materialOption) {
         this.material = materialOption;
         initComponents();
+        // Delete this when you start working
+        switch (this.material) {
+            case 1:
+                lblMaterial.setText("Material seleccionado: Libro");
+                break;
+            case 2:
+                lblMaterial.setText("Material seleccionado: Revista");
+                break;
+            case 3:
+                lblMaterial.setText("Material seleccionado: CD");
+                break;
+            case 4:
+                lblMaterial.setText("Material seleccionado: DVD");
+                break;
+        }
     }
 
     /**
@@ -30,12 +46,15 @@ public class DeleteMaterial extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        lblMaterial = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(240, 240, 230));
         setMinimumSize(new java.awt.Dimension(1024, 720));
         setPreferredSize(new java.awt.Dimension(1024, 720));
 
         jLabel1.setText("Eliminar material");
+
+        lblMaterial.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -45,18 +64,25 @@ public class DeleteMaterial extends javax.swing.JPanel {
                 .addContainerGap(489, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(438, 438, 438))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(400, 400, 400)
+                .addComponent(lblMaterial)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(114, 114, 114)
                 .addComponent(jLabel1)
-                .addContainerGap(590, Short.MAX_VALUE))
+                .addGap(121, 121, 121)
+                .addComponent(lblMaterial)
+                .addContainerGap(453, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblMaterial;
     // End of variables declaration//GEN-END:variables
 }
