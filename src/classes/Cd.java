@@ -1,5 +1,6 @@
 package classes;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,13 +9,16 @@ public class Cd extends MaterialAudiovisual {
     private int CdId;
     private String artista;
     private int numCanciones;
-
+    public Cd(String codigoIdentificacion){
+        super(codigoIdentificacion);
+    }
     public Cd(String codigoIdentificacion, String titulo, int unidadesDisponibles, String genero, String duracion, int cdId, String artista, int numCanciones) {
         super(codigoIdentificacion, titulo, unidadesDisponibles, genero, duracion);
         CdId = cdId;
         this.artista = artista;
         this.numCanciones = numCanciones;
     }
+
 
     public int getCdId() {
         return CdId;
@@ -49,7 +53,7 @@ public class Cd extends MaterialAudiovisual {
             statement.setString(2, this.getTitulo());
             statement.setString(3, this.getArtista());
             statement.setString(4, this.getGenero());
-            statement.setString(5, this.getGenero());
+            statement.setString(5, this.getDuracion());
             statement.setInt(6, this.numCanciones);
             statement.setInt(7, this.getUnidadesDisponibles());
             statement.executeUpdate();
@@ -61,7 +65,7 @@ public class Cd extends MaterialAudiovisual {
     }
 
     public void actualizarCd(ConnectionDb conexion) {
-        String query = "UPDATE cds SET titulo = ?, artista = ?, genero = ?, duracion = ?, num_canciones = ? WHERE codigo_identificacion = ?";
+        String query = "UPDATE cds SET titulo = ?, artista = ?, genero = ?, duracion = ?, num_canciones = ?, unidades_disponibles = ? WHERE codigo_identificacion = ?";
         try {
             PreparedStatement statement = conexion.getConnection().prepareStatement(query);
             statement.setString(1, this.getTitulo()); // Update with appropriate properties
@@ -69,7 +73,8 @@ public class Cd extends MaterialAudiovisual {
             statement.setString(3, this.getGenero());
             statement.setString(4, this.getDuracion());
             statement.setInt(5, this.numCanciones);
-            statement.setString(6, this.getCodigoIdentificacion());
+            statement.setInt(6,this.getUnidadesDisponibles());
+            statement.setString(7, this.getCodigoIdentificacion());
             statement.executeUpdate();
             System.out.println("CD actualizado correctamente.");
         } catch (SQLException e) {
@@ -91,26 +96,28 @@ public class Cd extends MaterialAudiovisual {
         }
     }
 
-    public void seleccionarCd(ConnectionDb conexion, int codigoIdentificacion) {
+    public Cd seleccionarCd(ConnectionDb conexion, String codigoIdentificacion) {
         String query = "SELECT * FROM cds WHERE codigo_identificacion = ?";
+        Cd cd = null;
         try {
             PreparedStatement statement = conexion.getConnection().prepareStatement(query);
-            statement.setInt(1, codigoIdentificacion);
+            statement.setString(1, codigoIdentificacion);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                // Retrieve data from the result set and set it to the properties of the Cd object
                 this.setCodigoIdentificacion(resultSet.getString("codigo_identificacion"));
                 this.setTitulo(resultSet.getString("titulo"));
                 this.setArtista(resultSet.getString("artista"));
                 super.setGenero(resultSet.getString("genero"));
                 this.setDuracion(resultSet.getString("duracion"));
                 this.numCanciones = resultSet.getInt("num_canciones");
-                // Set other properties accordingly
+                this.setUnidadesDisponibles(resultSet.getInt("unidades_disponibles"));
+                cd = new Cd(getCodigoIdentificacion(),getTitulo(),getUnidadesDisponibles(),getGenero(),getDuracion(),getCdId(),getArtista(),getNumCanciones());
             }
             System.out.println("CD seleccionado correctamente.");
         } catch (SQLException e) {
             System.out.println("Error al seleccionar el CD de la base de datos.");
             e.printStackTrace();
         }
+        return cd;
     }
 }

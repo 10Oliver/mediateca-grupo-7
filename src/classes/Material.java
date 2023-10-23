@@ -9,6 +9,9 @@ public class Material {
         Titulo = titulo;
         UnidadesDisponibles = unidadesDisponibles;
     }
+    public Material(String codigoIdentificacion) {
+        CodigoIdentificacion = codigoIdentificacion;
+    }
 
     public String getCodigoIdentificacion() {
         return CodigoIdentificacion;

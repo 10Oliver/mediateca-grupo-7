@@ -6,23 +6,23 @@ import java.sql.SQLException;
 
 public class ConnectionDb{
     private Connection connection;
-    private final String jdbcURL = "jdbc:mysql://localhost:3306/nombredb";
-    private final String username = "usr";
-    private final String password = "pwd";
-    public ConnectionDb(){
-        try {
-            connection = DriverManager.getConnection(jdbcURL, username, password);
-            if (connection != null) {
-                System.out.println("Conexión exitosa a la base de datos.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error en la conexión a la base de datos.");
-            e.printStackTrace();
-        }
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/mediateca";
+    private static final String JDBC_USER = "usr";
+    private static final String JDBC_PASS = "pwd";
+
+    public static Connection getConnection() {
+    Connection connection = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
+        System.out.println("Connection successful.");
+    } catch (ClassNotFoundException e) {
+        System.err.println("MySQL JDBC Driver not found. Include the library in your project.");
+    } catch (SQLException e) {
+        System.err.println("Connection failed. Error message: " + e.getMessage());
     }
-    public Connection getConnection() {
-        return connection;
-    }
+    return connection;
+}
 
     public void cerrarConexion() {
         try {

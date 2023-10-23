@@ -7,6 +7,9 @@ public class MaterialEscrito extends Material {
         super(codigoIdentificacion, titulo, unidadesDisponibles);
         Editorial = editorial;
     }
+    public MaterialEscrito(String codigoIdentificacion){
+        super(codigoIdentificacion);
+    }
 
     public String getEditorial() {
         return Editorial;
