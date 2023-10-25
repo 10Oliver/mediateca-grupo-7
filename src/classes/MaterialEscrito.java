@@ -10,6 +10,9 @@ public class MaterialEscrito extends Material {
     public MaterialEscrito(String codigoIdentificacion){
         super(codigoIdentificacion);
     }
+    public MaterialEscrito(){
+
+    }
 
     public String getEditorial() {
         return Editorial;

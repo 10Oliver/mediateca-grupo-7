@@ -1,14 +1,17 @@
 package classes;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cd extends MaterialAudiovisual {
     private int CdId;
     private String artista;
     private int numCanciones;
+
+    public Cd(){}
     public Cd(String codigoIdentificacion){
         super(codigoIdentificacion);
     }
@@ -119,5 +122,30 @@ public class Cd extends MaterialAudiovisual {
             e.printStackTrace();
         }
         return cd;
+    }
+    public List<Cd> seleccionarTodosCds(ConnectionDb conexion) {
+        String query = "SELECT * FROM cds";
+        Cd cd = null;
+        List<Cd> cds = new ArrayList<Cd>();
+        try {
+            PreparedStatement statement = conexion.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                this.setCodigoIdentificacion(resultSet.getString("codigo_identificacion"));
+                this.setTitulo(resultSet.getString("titulo"));
+                this.setArtista(resultSet.getString("artista"));
+                super.setGenero(resultSet.getString("genero"));
+                this.setDuracion(resultSet.getString("duracion"));
+                this.numCanciones = resultSet.getInt("num_canciones");
+                this.setUnidadesDisponibles(resultSet.getInt("unidades_disponibles"));
+                cd = new Cd(getCodigoIdentificacion(),getTitulo(),getUnidadesDisponibles(),getGenero(),getDuracion(),getCdId(),getArtista(),getNumCanciones());
+                cds.add(cd);
+            }
+            System.out.println("CD seleccionado correctamente.");
+        } catch (SQLException e) {
+            System.out.println("Error al seleccionar el CD de la base de datos.");
+            e.printStackTrace();
+        }
+        return cds;
     }
 }

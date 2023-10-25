@@ -3,10 +3,14 @@ package classes;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dvd extends MaterialAudiovisual {
     private int DvdId;
     private String director;
+
+    public Dvd() {}
 public Dvd(String codigoIdentificacion){
     super(codigoIdentificacion);
 }
@@ -106,5 +110,33 @@ public Dvd(String codigoIdentificacion){
             e.printStackTrace();
         }
         return dvd;
+    }
+
+    public List<Dvd> seleccionarTodosDvd(ConnectionDb conexion) {
+        String query = "SELECT * FROM dvds";
+        Dvd dvd = null;
+        List<Dvd> dvds = new ArrayList<Dvd>();
+        try {
+            PreparedStatement statement = conexion.getConnection().prepareStatement(query);
+            // statement.setString(1, codigoIdentificacion);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                // Retrieve data from the result set and set it to the properties of the Dvd object
+                this.setCodigoIdentificacion(resultSet.getString("codigo_identificacion"));
+                this.setTitulo(resultSet.getString("titulo"));
+                this.director = resultSet.getString("director");
+                this.setDuracion(resultSet.getString("duracion"));
+                this.setGenero(resultSet.getString("genero"));
+                this.setUnidadesDisponibles(resultSet.getInt("unidades_disponibles"));
+                // Set other properties accordingly
+                dvd = new Dvd(getCodigoIdentificacion(),getTitulo(),getUnidadesDisponibles(),getGenero(),getDuracion(),getDvdId(),getDirector());
+                dvds.add(dvd);
+            }
+            System.out.println("DVD seleccionado correctamente.");
+        } catch (SQLException e) {
+            System.out.println("Error al seleccionar el DVD de la base de datos.");
+            e.printStackTrace();
+        }
+        return dvds;
     }
 }

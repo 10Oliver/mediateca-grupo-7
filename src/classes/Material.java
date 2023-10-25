@@ -4,6 +4,10 @@ public class Material {
     private String Titulo;
     private int UnidadesDisponibles;
 
+    public Material(){
+
+    }
+
     public Material(String codigoIdentificacion, String titulo, int unidadesDisponibles) {
         CodigoIdentificacion = codigoIdentificacion;
         Titulo = titulo;

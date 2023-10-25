@@ -3,6 +3,8 @@ package classes;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Libro extends MaterialEscrito{
@@ -12,6 +14,8 @@ public class Libro extends MaterialEscrito{
     private int ISBN;
     private int AnioPublicacion;
 
+
+    public Libro(){}
     public Libro(String codigoIdentificacion){
         super(codigoIdentificacion);
     }
@@ -143,5 +147,33 @@ public class Libro extends MaterialEscrito{
             e.printStackTrace();
         }
         return libro;
+    }
+
+    public List<Libro> seleccionarTodosLibro(ConnectionDb conexion) {
+        String query = "SELECT * FROM libros";
+        Libro libro = null;
+        List<Libro> libros = new ArrayList<Libro>();
+        try {
+            PreparedStatement statement = conexion.getConnection().prepareStatement(query);
+            // statement.setString(1, codigoIdentificacion);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                this.setCodigoIdentificacion(resultSet.getString("codigo_identificacion"));
+                this.setTitulo(resultSet.getString("titulo"));
+                this.setNombreAutor(resultSet.getString("nombre_autor"));
+                this.setNumPaginas(resultSet.getInt("num_paginas"));
+                this.setEditorial(resultSet.getString("editorial"));
+                this.setISBN(resultSet.getInt("ISBN"));
+                this.setAnioPublicacion(resultSet.getInt("anio_publicacion"));
+                this.setUnidadesDisponibles(resultSet.getInt("unidades_disponibles"));
+                libro = new Libro(getCodigoIdentificacion(),getTitulo(),getUnidadesDisponibles(),getEditorial(),getLibroId(),getNombreAutor(),getNumPaginas(),getISBN(),getAnioPublicacion());
+                libros.add(libro);
+            }
+            System.out.println("Libro seleccionado correctamente.");
+        } catch (SQLException e) {
+            System.out.println("Error al seleccionar el libro de la base de datos.");
+            e.printStackTrace();
+        }
+        return libros;
     }
 }
