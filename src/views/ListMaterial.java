@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 package views;
+
 import classes.ConnectionDb;
 import classes.Dvd;
 import classes.Cd;
+import classes.Libro;
+import classes.Revista;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -17,11 +20,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Oliver
  */
 public class ListMaterial extends javax.swing.JPanel {
+
     private ConnectionDb con = new ConnectionDb();
-    
+
     // Posible columns
     private String[] dvdColumns = {"Código de identificación", "Titulo", "Director", "Duración", "Genero", "Unidades disponibles"};
-    private String[] cdColumns = {"Código de identificación", "Titulo", "Artista", "Genero", "Duración", "Número de canciones" ,"Unidades disponibles"};
+    private String[] cdColumns = {"Código de identificación", "Titulo", "Artista", "Genero", "Duración", "Número de canciones", "Unidades disponibles"};
     private String[] bookColumns = {"Código de identificación", "Titulo", "Autor", "Número de páginas", "Editorial", "ISBN", "Año de publicación", "Unidades disponibles"};
     private String[] megazineColumns = {"Código de identificación", "Titulo", "Editorial", "Periocidad", "Fecha de publicación", "Unidades disponibles"};
 
@@ -30,7 +34,7 @@ public class ListMaterial extends javax.swing.JPanel {
         Dvd dvd = new Dvd();
         List<Dvd> dvdList = dvd.seleccionarTodosDvd(connection);
         Vector<Vector<Object>> data = new Vector<>();
-        for (Dvd dvdItem: dvdList) {
+        for (Dvd dvdItem : dvdList) {
             Vector<Object> row = new Vector<>();
             row.add(dvdItem.getCodigoIdentificacion());
             row.add(dvdItem.getTitulo());
@@ -40,47 +44,88 @@ public class ListMaterial extends javax.swing.JPanel {
             row.add(dvdItem.getUnidadesDisponibles());
             data.add(row);
         }
-        
+
         Vector<Object> columns = new Vector<>(Arrays.asList(dvdColumns));
         DefaultTableModel model = new DefaultTableModel(data, columns);
         return model;
     }
-    
-     private DefaultTableModel fillCd(ConnectionDb connection) {
-         Cd cd = new Cd();
-         List<Cd> cdList = cd.seleccionarTodosCds(connection);
-         Vector<Vector<Object>> data = new Vector<>();
-         for (Cd cdItem: cdList) {
-             Vector<Object> row = new Vector<>();
-             row.add(cdItem.getCodigoIdentificacion());
-             row.add(cdItem.getTitulo());
-             row.add(cdItem.getArtista());
-             row.add(cdItem.getGenero());
-             row.add(cdItem.getDuracion());
-             row.add(cdItem.getNumCanciones());
-             row.add(cdItem.getUnidadesDisponibles());
-             data.add(row);
-         }
-         
+
+    private DefaultTableModel fillCd(ConnectionDb connection) {
+        Cd cd = new Cd();
+        List<Cd> cdList = cd.seleccionarTodosCds(connection);
+        Vector<Vector<Object>> data = new Vector<>();
+        for (Cd cdItem : cdList) {
+            Vector<Object> row = new Vector<>();
+            row.add(cdItem.getCodigoIdentificacion());
+            row.add(cdItem.getTitulo());
+            row.add(cdItem.getArtista());
+            row.add(cdItem.getGenero());
+            row.add(cdItem.getDuracion());
+            row.add(cdItem.getNumCanciones());
+            row.add(cdItem.getUnidadesDisponibles());
+            data.add(row);
+        }
+
         Vector<Object> columns = new Vector<>(Arrays.asList(cdColumns));
         DefaultTableModel model = new DefaultTableModel(data, columns);
         return model;
-     }
+    }
+
+    private DefaultTableModel fillBook(ConnectionDb connection) {
+        Libro book = new Libro();
+        List<Libro> bookList = book.seleccionarTodosLibro(connection);
+        Vector<Vector<Object>> data = new Vector<>();
+        for (Libro bookItem : bookList) {
+            Vector<Object> row = new Vector<>();
+            row.add(bookItem.getCodigoIdentificacion());
+            row.add(bookItem.getTitulo());
+            row.add(bookItem.getNombreAutor());
+            row.add(bookItem.getNumPaginas());
+            row.add(bookItem.getEditorial());
+            row.add(bookItem.getISBN());
+            row.add(bookItem.getAnioPublicacion());
+            row.add(bookItem.getUnidadesDisponibles());
+            data.add(row);
+        }
+        Vector<Object> columns = new Vector<>(Arrays.asList(bookColumns));
+        DefaultTableModel model = new DefaultTableModel(data, columns);
+        return model;
+    }
+
+    private DefaultTableModel fillMegazine(ConnectionDb connection) {
+        Revista megazine = new Revista();
+        List<Revista> megazineList = megazine.seleccionarTodosRevista(connection);
+        Vector<Vector<Object>> data = new Vector<>();
+        for (Revista megazineItem : megazineList) {
+            Vector<Object> row = new Vector<>();
+            row.add(megazineItem.getCodigoIdentificacion());
+            row.add(megazineItem.getTitulo());
+            row.add(megazineItem.getEditorial());
+            row.add(megazineItem.getPeriodicidad());
+            row.add(megazineItem.getFechaPublicacion());
+            row.add(megazineItem.getUnidadesDisponibles());
+            data.add(row);
+        }
+        Vector<Object> columns = new Vector<>(Arrays.asList(megazineColumns));
+        DefaultTableModel model = new DefaultTableModel(data, columns);
+        return model;
+    }
+
     /**
      * Creates new form ListMaterial
      */
     public ListMaterial(int materialOption) {
         initComponents();
-        
+
         // Start database conection
         con.getConnection();
         DefaultTableModel model = new DefaultTableModel();
-        switch(materialOption) {
+        switch (materialOption) {
             case 1:
-                model = this.fillDvd(con);
+                model = this.fillMegazine(con);
                 break;
             case 2:
-                model = this.fillDvd(con);
+                model = this.fillBook(con);
                 break;
             case 3:
                 model = this.fillCd(con);
@@ -92,9 +137,8 @@ public class ListMaterial extends javax.swing.JPanel {
         tbtMaterial.setModel(model);
         tbtMaterial.revalidate();
         tbtMaterial.repaint();
-        
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
