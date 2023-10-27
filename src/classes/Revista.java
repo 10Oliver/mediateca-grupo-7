@@ -3,12 +3,21 @@ package classes;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Revista extends MaterialEscrito {
         private int RevistaId;
         private String periodicidad;
         private String fechaPublicacion;
 
+        public Revista() {
+
+        }
+
+public Revista(String codigoIdentificacion){
+        super(codigoIdentificacion);
+}
         public Revista(String codigoIdentificacion, String titulo, int unidadesDisponibles, String editorial, int revistaId, String periodicidad, String fechaPublicacion) {
                 super(codigoIdentificacion, titulo, unidadesDisponibles, editorial);
                 RevistaId = revistaId;
@@ -41,8 +50,9 @@ public class Revista extends MaterialEscrito {
         }
 
 
+
         public void insertarRevista(ConnectionDb conexion) {
-                String query = "INSERT INTO revistas (codigo_identificacion, titulo, autor, periodicidad, fecha_publicacion, unidades_disponibles) VALUES (?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO revistas (codigo_identificacion, titulo, editorial, periodicidad, fecha_publicacion, unidades_disponibles) VALUES (?, ?, ?, ?, ?, ?)";
                 try {
                         PreparedStatement statement = conexion.getConnection().prepareStatement(query);
                         statement.setString(1, this.getCodigoIdentificacion());
@@ -60,14 +70,15 @@ public class Revista extends MaterialEscrito {
         }
 
         public void actualizarRevista(ConnectionDb conexion) {
-                String query = "UPDATE revistas SET titulo = ?, autor = ?, periodicidad = ?, fecha_publicacion = ? WHERE codigo_identificacion = ?";
+                String query = "UPDATE revistas SET titulo = ?, editorial = ?, periodicidad = ?, fecha_publicacion = ?, unidades_disponibles = ? WHERE codigo_identificacion = ?";
                 try {
                         PreparedStatement statement = conexion.getConnection().prepareStatement(query);
                         statement.setString(1, this.getTitulo()); // Update with appropriate properties
                         statement.setString(2, super.getEditorial());
                         statement.setString(3, this.periodicidad);
                         statement.setString(4, this.fechaPublicacion);
-                        statement.setString(5, this.getCodigoIdentificacion());
+                        statement.setInt(5,this.getUnidadesDisponibles());
+                        statement.setString(6, this.getCodigoIdentificacion());
                         statement.executeUpdate();
                         System.out.println("Revista actualizada correctamente.");
                 } catch (SQLException e) {
@@ -89,25 +100,53 @@ public class Revista extends MaterialEscrito {
                 }
         }
 
-        public void seleccionarRevista(ConnectionDb conexion, int codigoIdentificacion) {
+        public Revista seleccionarRevista(ConnectionDb conexion, String codigoIdentificacion) {
                 String query = "SELECT * FROM revistas WHERE codigo_identificacion = ?";
+                Revista revista = null;
                 try {
                         PreparedStatement statement = conexion.getConnection().prepareStatement(query);
-                        statement.setInt(1, codigoIdentificacion);
+                        statement.setString(1, codigoIdentificacion);
                         ResultSet resultSet = statement.executeQuery();
                         while (resultSet.next()) {
-                                // Retrieve data from the result set and set it to the properties of the Revista object
                                 this.setCodigoIdentificacion(resultSet.getString("codigo_identificacion"));
                                 this.setTitulo(resultSet.getString("titulo"));
-                                this.setEditorial(resultSet.getString("autor"));
+                                this.setEditorial(resultSet.getString("editorial"));
                                 this.periodicidad = resultSet.getString("periodicidad");
                                 this.fechaPublicacion = resultSet.getString("fecha_publicacion");
-                                // Set other properties accordingly
+                                this.setUnidadesDisponibles(resultSet.getInt("unidades_disponibles"));
+                                revista = new Revista(getCodigoIdentificacion(),getTitulo(),getUnidadesDisponibles(),getEditorial(),getRevistaId(),getPeriodicidad(),getFechaPublicacion());
                         }
                         System.out.println("Revista seleccionada correctamente.");
                 } catch (SQLException e) {
                         System.out.println("Error al seleccionar la revista de la base de datos.");
                         e.printStackTrace();
                 }
+                return revista;
+        }
+
+                public List<Revista> seleccionarTodosRevista(ConnectionDb conexion) {
+                String query = "SELECT * FROM revistas";
+                Revista revista = null;
+                List<Revista> revistas = new ArrayList<Revista>();
+                try {
+                        PreparedStatement statement = conexion.getConnection().prepareStatement(query);
+                        // statement.setString(1, codigoIdentificacion);
+                        ResultSet resultSet = statement.executeQuery();
+                        while (resultSet.next()) {
+                                this.setCodigoIdentificacion(resultSet.getString("codigo_identificacion"));
+                                this.setTitulo(resultSet.getString("titulo"));
+                                this.setEditorial(resultSet.getString("editorial"));
+                                this.periodicidad = resultSet.getString("periodicidad");
+                                this.fechaPublicacion = resultSet.getString("fecha_publicacion");
+                                this.setUnidadesDisponibles(resultSet.getInt("unidades_disponibles"));
+                                revista = new Revista(getCodigoIdentificacion(),getTitulo(),getUnidadesDisponibles(),getEditorial(),getRevistaId(),getPeriodicidad(),getFechaPublicacion());
+                                revistas.add(revista);
+                        }
+                        System.out.println("Revista seleccionada correctamente.");
+                } catch (SQLException e) {
+                        System.out.println("Error al seleccionar la revista de la base de datos.");
+                        e.printStackTrace();
+                }
+                return revistas;
         }
 }

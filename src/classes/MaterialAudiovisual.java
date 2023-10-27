@@ -9,7 +9,12 @@ public class MaterialAudiovisual extends Material{
         this.genero = genero;
         this.duracion = duracion;
     }
+public MaterialAudiovisual(String codigoIdentificacion){
+        super(codigoIdentificacion);
+}
+public MaterialAudiovisual(){
 
+}
     public String getGenero() {
         return genero;
     }
