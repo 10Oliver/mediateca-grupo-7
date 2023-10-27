@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package views;
+import components.*;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,8 +19,34 @@ public class ModifyMaterial extends javax.swing.JPanel {
      * Creates new form ModifyMaterial
      */
     public ModifyMaterial(int materialOption) {
-        this.material = materialOption;
         initComponents();
+        switch (materialOption) {
+            case 1:
+                BookComponent book = new BookComponent();
+                this.setLayout(book);
+                break;
+            case 2:
+                MegazineComponent megazine = new MegazineComponent();
+                this.setLayout(megazine);
+                break;
+            case 3:
+                CdComponent cd = new CdComponent();
+                this.setLayout(cd);
+                break;
+            case 4:
+                DvdComponent dvd = new DvdComponent();
+                this.setLayout(dvd);
+                break;
+        }
+    }
+    
+    private void setLayout(JPanel layout) {
+        layout.setSize(1024, 658);
+        layout.setVisible(true);
+        pnlContainer.removeAll();
+        pnlContainer.add(layout);
+        pnlContainer.revalidate();
+        pnlContainer.repaint();
     }
 
     /**
@@ -58,7 +86,7 @@ public class ModifyMaterial extends javax.swing.JPanel {
         );
         pnlContainerLayout.setVerticalGroup(
             pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 651, Short.MAX_VALUE)
+            .addGap(0, 658, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -72,7 +100,7 @@ public class ModifyMaterial extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(pnlContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
