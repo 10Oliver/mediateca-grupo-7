@@ -19,21 +19,6 @@ public class ModifyMaterial extends javax.swing.JPanel {
     public ModifyMaterial(int materialOption) {
         this.material = materialOption;
         initComponents();
-        // Delete this when you start working
-        switch (this.material) {
-            case 1:
-                lblMaterial.setText("Material seleccionado: Libro");
-                break;
-            case 2:
-                lblMaterial.setText("Material seleccionado: Revista");
-                break;
-            case 3:
-                lblMaterial.setText("Material seleccionado: CD");
-                break;
-            case 4:
-                lblMaterial.setText("Material seleccionado: DVD");
-                break;
-        }
     }
 
     /**
@@ -45,44 +30,57 @@ public class ModifyMaterial extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        lblMaterial = new javax.swing.JLabel();
+        pnlTitle = new javax.swing.JPanel();
+        lblTitile = new javax.swing.JLabel();
+        pnlContainer = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(230, 240, 240));
         setMinimumSize(new java.awt.Dimension(1024, 720));
         setPreferredSize(new java.awt.Dimension(1024, 720));
 
-        jLabel1.setText("Modificar material");
+        pnlTitle.setBackground(new java.awt.Color(140, 214, 255));
+        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
+        jPanel1Layout.columnWidths = new int[] {1};
+        jPanel1Layout.rowHeights = new int[] {1};
+        pnlTitle.setLayout(jPanel1Layout);
 
-        lblMaterial.setText("jLabel2");
+        lblTitile.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblTitile.setText("Modificar material");
+        pnlTitle.add(lblTitile, new java.awt.GridBagConstraints());
+
+        pnlContainer.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlContainerLayout = new javax.swing.GroupLayout(pnlContainer);
+        pnlContainer.setLayout(pnlContainerLayout);
+        pnlContainerLayout.setHorizontalGroup(
+            pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlContainerLayout.setVerticalGroup(
+            pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 651, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(436, 436, 436)
-                .addComponent(jLabel1)
-                .addContainerGap(485, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblMaterial)
-                .addGap(473, 473, 473))
+            .addComponent(pnlTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+            .addComponent(pnlContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jLabel1)
-                .addGap(118, 118, 118)
-                .addComponent(lblMaterial)
-                .addContainerGap(493, Short.MAX_VALUE))
+                .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblMaterial;
+    private javax.swing.JLabel lblTitile;
+    private javax.swing.JPanel pnlContainer;
+    private javax.swing.JPanel pnlTitle;
     // End of variables declaration//GEN-END:variables
 }
