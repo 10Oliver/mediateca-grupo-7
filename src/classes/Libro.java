@@ -150,7 +150,9 @@ public class Libro extends MaterialEscrito{
     }
 
     public List<Libro> seleccionarTodosLibro(ConnectionDb conexion) {
-        String query = "SELECT * FROM libros";
+        String query = "SELECT codigo_identificacion, titulo, num_paginas, nombre_autor, nombre_editorial as editorial, ISBN, anio_publicacion, unidades_disponibles FROM libros l\n" +
+        "INNER JOIN autor a ON l.id_autor = a.id_autor\n" +
+        "INNER JOIn editorial e ON e.id_editorial = l.id_editorial;";
         Libro libro = null;
         List<Libro> libros = new ArrayList<Libro>();
         try {

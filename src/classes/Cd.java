@@ -124,7 +124,9 @@ public class Cd extends MaterialAudiovisual {
         return cd;
     }
     public List<Cd> seleccionarTodosCds(ConnectionDb conexion) {
-        String query = "SELECT * FROM cds";
+        String query = "SELECT codigo_identificacion, titulo, nombre_artista as artista, nombre_genero as genero, duracion, num_canciones, unidades_disponibles FROM cds c\n" +
+        "INNER JOIN generos g ON g.id_genero = c.id_genero\n" +
+        "INNER JOIN artista a ON a.id_artista = c.id_artista;";
         Cd cd = null;
         List<Cd> cds = new ArrayList<Cd>();
         try {

@@ -113,7 +113,8 @@ public Dvd(String codigoIdentificacion){
     }
 
     public List<Dvd> seleccionarTodosDvd(ConnectionDb conexion) {
-        String query = "SELECT * FROM dvds";
+        String query = "SELECT codigo_identificacion, titulo, director, g.nombre_genero as genero, duracion, unidades_disponibles FROM dvds d\n" +
+        "INNER JOIN generos g ON g.id_genero = d.id_genero";
         Dvd dvd = null;
         List<Dvd> dvds = new ArrayList<Dvd>();
         try {

@@ -122,10 +122,10 @@ public class ListMaterial extends javax.swing.JPanel {
         DefaultTableModel model = new DefaultTableModel();
         switch (materialOption) {
             case 1:
-                model = this.fillMegazine(con);
+                model = this.fillBook(con);
                 break;
             case 2:
-                model = this.fillBook(con);
+                model = this.fillMegazine(con);
                 break;
             case 3:
                 model = this.fillCd(con);
