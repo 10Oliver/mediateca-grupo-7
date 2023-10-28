@@ -6,7 +6,6 @@
 package views;
 
 import javax.swing.JLabel;
-
 import views.MaterialOptions;
 
 /**

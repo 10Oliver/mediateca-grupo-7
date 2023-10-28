@@ -139,4 +139,8 @@ public Dvd(String codigoIdentificacion){
         }
         return dvds;
     }
+
+    public boolean borrarDvd(ConnectionDb conexion, String codigoIdentificacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -7,11 +7,17 @@ package views;
 
 import javax.swing.JPanel;
 
+
+
 /**
  *
  * @author Oliver
  */
 public class MaterialOptions extends javax.swing.JPanel {
+    public void setTitulo(String titulo) {
+    lblTittle.setText(titulo);
+}
+
     private int viewOption;
     private JPanel mainPanel;
 
@@ -24,11 +30,13 @@ public class MaterialOptions extends javax.swing.JPanel {
         initComponents();
     }
     
-    private void showView(int materialChoose) {
+    void showView(int materialChoose) {
+        System.out.println("View Option: " + this.viewOption);
         mainPanel.removeAll();
-        System.out.println(this.viewOption);
         switch(this.viewOption){
             case 1:
+                lblTittle.setText("Elige el material que desea agregar");
+                System.out.println("Setting title to 'Elige el material que desea agregar'");
                 AddMaterial addMaterial = new AddMaterial(materialChoose);
                 addMaterial.setSize(1024, 720);
                 addMaterial.setVisible(true);
@@ -36,33 +44,38 @@ public class MaterialOptions extends javax.swing.JPanel {
                 break;
             // Modify material
             case 2:
+                lblTittle.setText("Elige el material que desea modificar");
                 ModifyMaterial modifyMaterial = new ModifyMaterial(materialChoose);
                 modifyMaterial.setSize(1024, 720);
                 mainPanel.add(modifyMaterial);
                 break;
             // Delete material
             case 3:
-                DeleteMaterial deleteMaterial = new DeleteMaterial(materialChoose);
+                lblTittle.setText("Elige el material que quiere eliminar");
+                DeleteMaterial deleteMaterial = new DeleteMaterial(materialChoose,  mainPanel);
                 deleteMaterial.setSize(1024, 720);
                 mainPanel.add(deleteMaterial);
                 break;
             // Search material
             case 4:
+                lblTittle.setText("Elige el material que desea buscar");
                 SearchMaterial searchMaterial = new SearchMaterial(materialChoose);
                 searchMaterial.setSize(1024, 720);
                 mainPanel.add(searchMaterial);
                 break;
             // List material
             case 5:
+                lblTittle.setText("Elige el material que desea listar");
                 ListMaterial listMaterial = new ListMaterial(materialChoose);
                 listMaterial.setSize(1024, 720);
                 mainPanel.add(listMaterial);
                 break;
         }
+        mainPanel.add(lblTittle);
         mainPanel.revalidate();
         mainPanel.repaint();
     }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,7 +96,9 @@ public class MaterialOptions extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1024, 720));
 
         lblTittle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblTittle.setText("Elige el material que desea utilizar");
+        lblTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTittle.setText("Seleccione el material que desea eliminar:");
+        lblTittle.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnMegazine.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnMegazine.setText("Revista");
@@ -129,10 +144,6 @@ public class MaterialOptions extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(291, 291, 291)
-                .addComponent(lblTittle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(155, 155, 155)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -145,25 +156,28 @@ public class MaterialOptions extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDVD, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(229, 229, 229))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
+                .addGap(62, 62, 62)
                 .addComponent(lblTittle)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(btnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
-                        .addComponent(btnCD, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(btnMegazine, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97)
-                        .addComponent(btnDVD, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addGap(86, 86, 86)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMegazine, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(95, 95, 95)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCD, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDVD, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
+
+        lblTittle.getAccessibleContext().setAccessibleName("Seleccionar material");
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMegazineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMegazineMouseClicked
@@ -171,7 +185,7 @@ public class MaterialOptions extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMegazineMouseClicked
 
     private void btnCDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCDMouseClicked
-       this.showView(3);
+       this.showView(3);     
     }//GEN-LAST:event_btnCDMouseClicked
 
     private void btnBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBookMouseClicked

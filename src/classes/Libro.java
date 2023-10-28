@@ -176,4 +176,8 @@ public class Libro extends MaterialEscrito{
         }
         return libros;
     }
+
+    public boolean borrarLibro(ConnectionDb conexion, String codigoIdentificacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
