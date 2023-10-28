@@ -22,7 +22,7 @@ public class ModifyMaterial extends javax.swing.JPanel {
         initComponents();
         switch (materialOption) {
             case 1:
-                BookComponent book = new BookComponent();
+                BookComponent book = new BookComponent(2);
                 this.setLayout(book);
                 break;
             case 2:
