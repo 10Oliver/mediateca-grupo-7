@@ -156,32 +156,32 @@ public class DeleteMaterial extends javax.swing.JPanel {
             ConnectionDb conexion = new ConnectionDb(); // Reemplaza esto por la creación de tu instancia de ConnectionDb
             switch (material) {
                 case 1: // Libro
-                    Libro libro = new Libro();
-                    if (libro.borrarLibro(conexion, codigoIdentificacion)) {
+                    Libro libro = new Libro(codigoIdentificacion);
+                    if (libro.borrarLibro(conexion)) {
                         JOptionPane.showMessageDialog(this, "El libro ha sido eliminado correctamente.");
                     } else {
                         JOptionPane.showMessageDialog(this, "Error al eliminar el libro. Verifica el código de identificación.");
                     }
                     break;
                 case 2: // Revista
-                    Revista revista = new Revista();
-                    if (revista.borrarRevista(conexion, codigoIdentificacion)) {
+                    Revista revista = new Revista(codigoIdentificacion);
+                    if (revista.borrarRevista(conexion)) {
                         JOptionPane.showMessageDialog(this, "La revista ha sido eliminada correctamente.");
                     } else {
                         JOptionPane.showMessageDialog(this, "Error al eliminar la revista. Verifica el código de identificación.");
                     }
                     break;
                 case 3: // CD
-                    Cd cd = new Cd();
-                    if (cd.borrarCd(conexion, codigoIdentificacion)) {
+                    Cd cd = new Cd(codigoIdentificacion);
+                    if (cd.borrarCd(conexion)) {
                         JOptionPane.showMessageDialog(this, "El CD ha sido eliminado correctamente.");
                     } else {
                         JOptionPane.showMessageDialog(this, "Error al eliminar el CD. Verifica el código de identificación.");
                     }
                     break;
                 case 4: // DVD
-                    Dvd dvd = new Dvd();
-                    if (dvd.borrarDvd(conexion, codigoIdentificacion)) {
+                    Dvd dvd = new Dvd(codigoIdentificacion);
+                    if (dvd.borrarDvd(conexion)) {
                         JOptionPane.showMessageDialog(this, "El DVD ha sido eliminado correctamente.");
                     } else {
                         JOptionPane.showMessageDialog(this, "Error al eliminar el DVD. Verifica el código de identificación.");

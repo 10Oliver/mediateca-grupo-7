@@ -11,7 +11,7 @@ public class Dvd extends MaterialAudiovisual {
     private String director;
 
     public Dvd() {}
-public Dvd(String codigoIdentificacion){
+    public Dvd(String codigoIdentificacion){
     super(codigoIdentificacion);
 }
     public Dvd(String codigoIdentificacion, String titulo, int unidadesDisponibles, String genero, String duracion, int dvdId, String director) {
@@ -73,16 +73,18 @@ public Dvd(String codigoIdentificacion){
         }
     }
 
-    public void borrarDvd(ConnectionDb conexion) {
+    public boolean borrarDvd(ConnectionDb conexion) {
         String query = "DELETE FROM dvds WHERE codigo_identificacion = ?";
         try {
             PreparedStatement statement = conexion.getConnection().prepareStatement(query);
             statement.setString(1, this.getCodigoIdentificacion()); // Delete based on the unique identifier
             statement.executeUpdate();
             System.out.println("DVD eliminado correctamente.");
+            return true;
         } catch (SQLException e) {
             System.out.println("Error al eliminar el DVD de la base de datos.");
             e.printStackTrace();
+            return false;
         }
     }
 

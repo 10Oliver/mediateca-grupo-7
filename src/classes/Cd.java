@@ -86,16 +86,18 @@ public class Cd extends MaterialAudiovisual {
         }
     }
 
-    public void borrarCd(ConnectionDb conexion) {
+    public boolean borrarCd(ConnectionDb conexion) {
         String query = "DELETE FROM cds WHERE codigo_identificacion = ?";
         try {
             PreparedStatement statement = conexion.getConnection().prepareStatement(query);
             statement.setString(1, this.getCodigoIdentificacion()); // Delete based on the unique identifier
             statement.executeUpdate();
             System.out.println("CD eliminado correctamente.");
+            return true;
         } catch (SQLException e) {
             System.out.println("Error al eliminar el CD de la base de datos.");
             e.printStackTrace();
+            return false;
         }
     }
 

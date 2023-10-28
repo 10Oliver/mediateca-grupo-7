@@ -110,16 +110,18 @@ public class Libro extends MaterialEscrito{
         }
     }
 
-    public void borrarLibro(ConnectionDb conexion) {
+    public boolean borrarLibro(ConnectionDb conexion) {
         String query = "DELETE FROM libros WHERE codigo_identificacion = ?";
         try {
             PreparedStatement statement = conexion.getConnection().prepareStatement(query);
             statement.setString(1, this.getCodigoIdentificacion());
             statement.executeUpdate();
             System.out.println("Libro eliminado correctamente.");
+            return true;
         } catch (SQLException e) {
             System.out.println("Error al eliminar el libro de la base de datos.");
             e.printStackTrace();
+            return false;
         }
     }
 

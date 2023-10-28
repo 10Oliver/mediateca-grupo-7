@@ -15,7 +15,7 @@ public class Revista extends MaterialEscrito {
 
         }
 
-public Revista(String codigoIdentificacion){
+        public Revista(String codigoIdentificacion){
         super(codigoIdentificacion);
 }
         public Revista(String codigoIdentificacion, String titulo, int unidadesDisponibles, String editorial, int revistaId, String periodicidad, String fechaPublicacion) {
@@ -87,16 +87,18 @@ public Revista(String codigoIdentificacion){
                 }
         }
 
-        public void borrarRevista(ConnectionDb conexion) {
+        public boolean borrarRevista(ConnectionDb conexion) {
                 String query = "DELETE FROM revistas WHERE codigo_identificacion = ?";
                 try {
                         PreparedStatement statement = conexion.getConnection().prepareStatement(query);
                         statement.setString(1, this.getCodigoIdentificacion()); // Delete based on the unique identifier
                         statement.executeUpdate();
                         System.out.println("Revista eliminada correctamente.");
+                        return true;
                 } catch (SQLException e) {
                         System.out.println("Error al eliminar la revista de la base de datos.");
                         e.printStackTrace();
+                        return false;
                 }
         }
 
