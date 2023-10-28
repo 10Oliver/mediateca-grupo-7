@@ -30,11 +30,11 @@ public class ModifyMaterial extends javax.swing.JPanel {
                 this.setLayout(megazine);
                 break;
             case 3:
-                CdComponent cd = new CdComponent(1);
+                CdComponent cd = new CdComponent(2);
                 this.setLayout(cd);
                 break;
             case 4:
-                DvdComponent dvd = new DvdComponent();
+                DvdComponent dvd = new DvdComponent(1);
                 this.setLayout(dvd);
                 break;
         }

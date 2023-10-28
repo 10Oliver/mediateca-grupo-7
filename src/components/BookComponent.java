@@ -93,13 +93,12 @@ public class BookComponent extends javax.swing.JPanel {
         lblAñoPubliación.setText("Año de publicación");
 
         pnlBotones.setBackground(new java.awt.Color(255, 255, 255));
-        java.awt.GridBagLayout pnlBotonesLayout = new java.awt.GridBagLayout();
-        pnlBotonesLayout.rowWeights = new double[] {1.0};
-        pnlBotones.setLayout(pnlBotonesLayout);
+        pnlBotones.setLayout(new java.awt.GridBagLayout());
 
         pnlAcciones.setBackground(new java.awt.Color(255, 255, 255));
         pnlAcciones.setLayout(new java.awt.GridBagLayout());
 
+        btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.setMaximumSize(new java.awt.Dimension(100, 35));
         btnAgregar.setMinimumSize(new java.awt.Dimension(100, 35));
@@ -110,6 +109,7 @@ public class BookComponent extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         pnlAcciones.add(btnAgregar, gridBagConstraints);
 
+        btnModificar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnModificar.setText("Modificar");
         btnModificar.setMaximumSize(new java.awt.Dimension(100, 35));
         btnModificar.setMinimumSize(new java.awt.Dimension(100, 35));
@@ -125,6 +125,9 @@ public class BookComponent extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 30);
         pnlBotones.add(pnlAcciones, gridBagConstraints);
 
+        pnlCancelar.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(100, 35));
 
@@ -154,22 +157,24 @@ public class BookComponent extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTitulo)
-                    .addComponent(txtNumPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumPaginas)
-                    .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblISBN))
-                .addGap(124, 124, 124)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblAñoPubliación)
-                    .addComponent(txtAnioPublicacion, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                    .addComponent(lblEditorial)
-                    .addComponent(cmbEditorial, 0, 350, Short.MAX_VALUE)
-                    .addComponent(cmbAutor, 0, 350, Short.MAX_VALUE)
-                    .addComponent(lblAutor)
-                    .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTitulo)
+                            .addComponent(txtNumPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumPaginas)
+                            .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblISBN))
+                        .addGap(124, 124, 124)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblAñoPubliación)
+                            .addComponent(txtAnioPublicacion, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(lblEditorial)
+                            .addComponent(cmbEditorial, 0, 350, Short.MAX_VALUE)
+                            .addComponent(cmbAutor, 0, 350, Short.MAX_VALUE)
+                            .addComponent(lblAutor))))
                 .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -199,9 +204,9 @@ public class BookComponent extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAnioPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                 .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addGap(77, 77, 77))
         );
     }// </editor-fold>//GEN-END:initComponents
 

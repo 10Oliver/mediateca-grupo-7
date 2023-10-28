@@ -88,6 +88,7 @@ public class CdComponent extends javax.swing.JPanel {
         pnlAcciones.setBackground(new java.awt.Color(255, 255, 255));
         pnlAcciones.setLayout(new java.awt.GridBagLayout());
 
+        btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.setMaximumSize(new java.awt.Dimension(100, 35));
         btnAgregar.setMinimumSize(new java.awt.Dimension(100, 35));
@@ -98,6 +99,7 @@ public class CdComponent extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         pnlAcciones.add(btnAgregar, gridBagConstraints);
 
+        btnModificar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnModificar.setText("Modificar");
         btnModificar.setMaximumSize(new java.awt.Dimension(100, 35));
         btnModificar.setMinimumSize(new java.awt.Dimension(100, 35));
@@ -113,6 +115,9 @@ public class CdComponent extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 30);
         pnlBotones.add(pnlAcciones, gridBagConstraints);
 
+        pnlCancelar.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(100, 35));
 
@@ -145,23 +150,21 @@ public class CdComponent extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUnidadesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUnidadesDisponibles)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDuracion, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                            .addComponent(lblDuracion)
-                            .addComponent(txtTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                            .addComponent(lblTitulo))
-                        .addGap(165, 165, 165)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblArtista)
-                            .addComponent(cmbArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNumCanciones)
-                            .addComponent(txtNumCanciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtDuracion, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                                .addComponent(lblDuracion)
+                                .addComponent(txtTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                                .addComponent(lblTitulo))
+                            .addGap(165, 165, 165)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblArtista)
+                                .addComponent(cmbArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblNumCanciones)
+                                .addComponent(txtNumCanciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(89, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,9 +189,9 @@ public class CdComponent extends javax.swing.JPanel {
                 .addComponent(lblUnidadesDisponibles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtUnidadesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(122, 122, 122))
         );
     }// </editor-fold>//GEN-END:initComponents
 
