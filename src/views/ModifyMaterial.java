@@ -26,7 +26,7 @@ public class ModifyMaterial extends javax.swing.JPanel {
                 this.setLayout(book);
                 break;
             case 2:
-                MegazineComponent megazine = new MegazineComponent();
+                MegazineComponent megazine = new MegazineComponent(2);
                 this.setLayout(megazine);
                 break;
             case 3:
@@ -34,7 +34,7 @@ public class ModifyMaterial extends javax.swing.JPanel {
                 this.setLayout(cd);
                 break;
             case 4:
-                DvdComponent dvd = new DvdComponent(1);
+                DvdComponent dvd = new DvdComponent(2);
                 this.setLayout(dvd);
                 break;
         }
