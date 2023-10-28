@@ -14,10 +14,10 @@ public class Libro extends MaterialEscrito{
     private int ISBN;
     private int AnioPublicacion;
 
-    final String INSERT_STATEMENT = "INSERT INTO libros (codigo_identificacion, titulo, id_autor, num_paginas, id_editorial, ISBN, anio_publicacion, unidades_disponibles) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    final String INSERT_STATEMENT = "INSERT INTO libros (titulo, id_autor, num_paginas, id_editorial, ISBN, anio_publicacion, unidades_disponibles) VALUES (?, ?, ?, ?, ?, ?, ?);";
     final String SELECT_STATEMENT = "SELECT l.id_libro, l.codigo_identificacion, l.titulo, a.nombre_autor, l.num_paginas, e.nombre_editorial, l.ISBN, l.anio_publicacion, l.unidades_disponibles FROM libros l JOIN autor a ON l.id_autor = a.id_autor JOIN editorial e ON l.id_editorial = e.id_editorial WHERE codigo_identificacion = ?";
-    final String UPDATE_STATEMENT = "UPDATE libros SET codigo_identificacion = ?, titulo = ?, id_autor = ?, num_paginas = ?, id_editorial = ?, ISBN = ?, anio_publicacion = ?, unidades_disponibles = ? WHERE id_libro = ?";
-    final String DELETE_STATEMENT = "DELETE FROM libros WHERE id_libro = ?";
+    final String UPDATE_STATEMENT = "UPDATE libros SET titulo = ?, id_autor = ?, num_paginas = ?, id_editorial = ?, ISBN = ?, anio_publicacion = ?, unidades_disponibles = ? WHERE codigo_identificacion = ?";
+    final String DELETE_STATEMENT = "DELETE FROM libros WHERE codigo_identificacion = ?";
     final String SELECTALL_STATEMENT = "SELECT l.id_libro, l.codigo_identificacion, l.titulo, a.nombre_autor, l.num_paginas, e.nombre_editorial, l.ISBN, l.anio_publicacion, l.unidades_disponibles FROM libros l JOIN autor a ON l.id_autor = a.id_autor JOIN editorial e ON l.id_editorial = e.id_editorial";
     public Libro(){}
     public Libro(String codigoIdentificacion){
@@ -72,12 +72,12 @@ public class Libro extends MaterialEscrito{
         AnioPublicacion = anioPublicacion;
     }
 
-    public Libro seleccionarLibro(String codigoIdentificacion,ConnectionDb connection) {
+    public Libro seleccionarLibro(ConnectionDb connection) {
         Libro libro = null;
         try {
 
             PreparedStatement statement = connection.getConnection().prepareStatement(SELECT_STATEMENT);
-            statement.setString(1, codigoIdentificacion);
+            statement.setString(1, getCodigoIdentificacion());
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -118,15 +118,14 @@ public class Libro extends MaterialEscrito{
 
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(UPDATE_STATEMENT);
-            statement.setString(1, getCodigoIdentificacion());
-            statement.setString(2, getTitulo());
-            statement.setInt(3, idAutor);
-            statement.setInt(4, getNumPaginas());
-            statement.setInt(5, idEditorial);
-            statement.setInt(6, getISBN());
-            statement.setInt(7, getAnioPublicacion());
-            statement.setInt(8, getUnidadesDisponibles());
-            statement.setInt(9, getLibroId());
+            statement.setString(1, getTitulo());
+            statement.setInt(2, idAutor);
+            statement.setInt(3, getNumPaginas());
+            statement.setInt(4, idEditorial);
+            statement.setInt(5, getISBN());
+            statement.setInt(6, getAnioPublicacion());
+            statement.setInt(7, getUnidadesDisponibles());
+            statement.setString(8, getCodigoIdentificacion());
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -142,14 +141,13 @@ public class Libro extends MaterialEscrito{
     public void insertarLibro(ConnectionDb connection,int autorId,int editorialId){
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(INSERT_STATEMENT);
-            statement.setString(1, getCodigoIdentificacion());
-            statement.setString(2, getTitulo());
-            statement.setInt(3, autorId);
-            statement.setInt(4, getNumPaginas());
-            statement.setInt(5, editorialId);
-            statement.setInt(6, getISBN());
-            statement.setInt(7, getAnioPublicacion());
-            statement.setInt(8, getUnidadesDisponibles());
+            statement.setString(1, getTitulo());
+            statement.setInt(2, autorId);
+            statement.setInt(3, getNumPaginas());
+            statement.setInt(4, editorialId);
+            statement.setInt(5, getISBN());
+            statement.setInt(6, getAnioPublicacion());
+            statement.setInt(7, getUnidadesDisponibles());
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
