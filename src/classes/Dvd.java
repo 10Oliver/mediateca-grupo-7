@@ -9,11 +9,11 @@ import java.util.List;
 public class Dvd extends MaterialAudiovisual {
     private int id_dvd;
     private String director;
-    final String INSERT_STATEMENT = "INSERT INTO dvds (codigo_identificacion, titulo, director, duracion, id_genero, unidades_disponibles) VALUES (?, ?, ?, ?, ?, ?)";
+    final String INSERT_STATEMENT = "INSERT INTO dvds (titulo, director, duracion, id_genero, unidades_disponibles) VALUES (?, ?, ?, ?, ?)";
     final String SELECT_STATEMENT = "SELECT dvds.id_dvd, dvds.codigo_identificacion, dvds.titulo, dvds.director, dvds.duracion, generos.nombre_genero, dvds.unidades_disponibles FROM dvds JOIN generos ON dvds.id_genero = generos.id_genero WHERE dvds.codigo_identificacion = ?";
     final String SELECTALL_STATEMENT = "SELECT dvds.id_dvd, dvds.codigo_identificacion, dvds.titulo, dvds.director, dvds.duracion, generos.nombre_genero, dvds.unidades_disponibles FROM dvds JOIN generos ON dvds.id_genero = generos.id_genero";
-    final String UPDATE_STATEMENT = "UPDATE dvds SET codigo_identificacion=?, titulo=?, director=?, duracion=?, id_genero=?, unidades_disponibles=? WHERE id_dvd=?";
-    final String DELETE_STATEMENT = "DELETE FROM dvds WHERE id_dvd=?";
+    final String UPDATE_STATEMENT = "UPDATE dvds SET titulo=?, director=?, duracion=?, id_genero=?, unidades_disponibles=? WHERE codigo_identificacion=?";
+    final String DELETE_STATEMENT = "DELETE FROM dvds WHERE codigo_identificacion=?";
 
     public Dvd() {
     }
@@ -47,12 +47,11 @@ public class Dvd extends MaterialAudiovisual {
     public void insertDVD(ConnectionDb connection, int idGenero) {
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(INSERT_STATEMENT);
-            statement.setString(1, getCodigoIdentificacion());
-            statement.setString(2, getTitulo());
-            statement.setString(3, getDirector());
-            statement.setString(4, getDuracion());
-            statement.setInt(5, idGenero);
-            statement.setInt(6, getUnidadesDisponibles());
+            statement.setString(1, getTitulo());
+            statement.setString(2, getDirector());
+            statement.setString(3, getDuracion());
+            statement.setInt(4, idGenero);
+            statement.setInt(5, getUnidadesDisponibles());
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("A new DVD was inserted successfully!");
@@ -65,13 +64,12 @@ public class Dvd extends MaterialAudiovisual {
     public void updateDVD(ConnectionDb connection,int idGenero) {
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(UPDATE_STATEMENT);
-            statement.setString(1, getCodigoIdentificacion());
-            statement.setString(2, getTitulo());
-            statement.setString(3, getDirector());
-            statement.setString(4, getDuracion());
-            statement.setInt(5, idGenero);
-            statement.setInt(6, getUnidadesDisponibles());
-            statement.setInt(7, getId_dvd());
+            statement.setString(1, getTitulo());
+            statement.setString(2, getDirector());
+            statement.setString(3, getDuracion());
+            statement.setInt(4, idGenero);
+            statement.setInt(5, getUnidadesDisponibles());
+            statement.setString(6, getCodigoIdentificacion());
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("DVD was updated successfully!");
@@ -84,7 +82,7 @@ public class Dvd extends MaterialAudiovisual {
     public void deleteDVD(ConnectionDb connection) {
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(DELETE_STATEMENT);
-            statement.setInt(1, getId_dvd());
+            statement.setString(1, getCodigoIdentificacion());
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("DVD was deleted successfully!");
@@ -120,12 +118,11 @@ public class Dvd extends MaterialAudiovisual {
         }
         return dvd;
     }
-    public List<Dvd> seleccionarTodosDvd(String codigoIdentificacion, ConnectionDb connection) {
+        public List<Dvd> seleccionarTodosDvd(ConnectionDb connection) {
         List<Dvd> dvds = new ArrayList<Dvd>();
         Dvd dvd = null;
         try {
-            PreparedStatement statement = connection.getConnection().prepareStatement(SELECT_STATEMENT);
-            statement.setString(1, codigoIdentificacion);
+            PreparedStatement statement = connection.getConnection().prepareStatement(SELECTALL_STATEMENT);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
