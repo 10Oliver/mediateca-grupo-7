@@ -263,7 +263,23 @@ public class MegazineComponent extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        // TODO add your handling code here:
+        this.con.getConnection();
+        int availableUnits = 0;
+        if (this.checkFields()) {
+            JOptionPane.showMessageDialog(null, "Se deben de seleccionar todos los campos antes de editar y guardar la revista.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            availableUnits = Integer.parseInt(txtUnidadesDisponibles.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            Revista megazine = new Revista("", txtTitulo.getText(), availableUnits, cmbEditorial.getSelectedItem().toString(), 1, txtPeriodicidad.getText(), txtFechaPublicidad.getText());
+            megazine.updateRevista(con, cmbEditorial.getSelectedIndex());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked

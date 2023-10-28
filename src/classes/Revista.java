@@ -11,10 +11,10 @@ public class Revista extends MaterialEscrito {
         private int revistaId;
         private String periodicidad;
         private String fechaPublicacion;
-        final String INSERT_STATEMENT = "INSERT INTO revistas (codigo_identificacion, titulo, id_editorial, periodicidad, fecha_publicacion, unidades_disponibles) VALUES (?, ?, ?, ?, ?, ?)";
+        final String INSERT_STATEMENT = "INSERT INTO revistas (titulo, id_editorial, periodicidad, fecha_publicacion, unidades_disponibles) VALUES (?, ?, ?, ?, ?)";
         final String SELECT_STATEMENT = "SELECT r.id_revista, r.codigo_identificacion, r.titulo, e.nombre_editorial, r.periodicidad, r.fecha_publicacion, r.unidades_disponibles FROM revistas r INNER JOIN editorial e ON r.id_editorial = e.id_editorial WHERE r.codigo_identificacion = ?";
-        final String UPDATE_STATEMENT = "UPDATE revistas SET codigo_identificacion = ?, titulo = ?, id_editorial = ?, periodicidad = ?, fecha_publicacion = ?, unidades_disponibles = ? WHERE codigo_identificacion = ?";
-        final String DELETE_STATEMENT = "DELETE FROM revistas WHERE id_revista = ?";
+        final String UPDATE_STATEMENT = "UPDATE revistas SET titulo = ?, id_editorial = ?, periodicidad = ?, fecha_publicacion = ?, unidades_disponibles = ? WHERE codigo_identificacion = ?";
+        final String DELETE_STATEMENT = "DELETE FROM revistas WHERE codigo_identificacion = ?";
         final String SELECTALL_STATEMENT = "SELECT r.id_revista, r.codigo_identificacion, r.titulo, e.nombre_editorial, r.periodicidad, r.fecha_publicacion, r.unidades_disponibles FROM revistas r INNER JOIN editorial e ON r.id_editorial = e.id_editorial";
 
         public Revista() {
@@ -59,12 +59,11 @@ public class Revista extends MaterialEscrito {
         public void insertRevista(ConnectionDb connection,int idEditorial) {
                 try {
                         PreparedStatement statement = connection.getConnection().prepareStatement(INSERT_STATEMENT);
-                        statement.setString(1, getCodigoIdentificacion());
-                        statement.setString(2, getTitulo());
-                        statement.setInt(3, idEditorial);
-                        statement.setString(4, getPeriodicidad());
-                        statement.setString(5, getFechaPublicacion());
-                        statement.setInt(6, getUnidadesDisponibles());
+                        statement.setString(1, getTitulo());
+                        statement.setInt(2, idEditorial);
+                        statement.setString(3, getPeriodicidad());
+                        statement.setString(4, getFechaPublicacion());
+                        statement.setInt(5, getUnidadesDisponibles());
 
                         statement.executeUpdate();
                         System.out.println("Revista inserted successfully.");
@@ -77,7 +76,6 @@ public class Revista extends MaterialEscrito {
         public void updateRevista(ConnectionDb connection,int idEditorial) {
                 try {
                         PreparedStatement statement = connection.getConnection().prepareStatement(UPDATE_STATEMENT);
-//                        statement.setString(1, getCodigoIdentificacion());
                         statement.setString(1, getTitulo());
                         statement.setInt(2, idEditorial);
                         statement.setString(3, getPeriodicidad());
@@ -134,7 +132,6 @@ public class Revista extends MaterialEscrito {
                 Revista revista = null;
                 try {
                         PreparedStatement statement = connection.getConnection().prepareStatement(SELECTALL_STATEMENT);
-//                        statement.setString(1, getCodigoIdentificacion());
                         ResultSet resultSet = statement.executeQuery();
 
                         while (resultSet.next()) {

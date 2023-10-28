@@ -52,7 +52,7 @@ public class ListMaterial extends javax.swing.JPanel {
 
     private DefaultTableModel fillCd(ConnectionDb connection) {
         Cd cd = new Cd();
-        List<Cd> cdList = cd.seleccionarTodosCds(connection);
+        List<Cd> cdList = cd.selectTodosCd(connection);
         Vector<Vector<Object>> data = new Vector<>();
         for (Cd cdItem : cdList) {
             Vector<Object> row = new Vector<>();
@@ -61,7 +61,7 @@ public class ListMaterial extends javax.swing.JPanel {
             row.add(cdItem.getArtista());
             row.add(cdItem.getGenero());
             row.add(cdItem.getDuracion());
-            row.add(cdItem.getNumCanciones());
+            row.add(cdItem.getNum_canciones());
             row.add(cdItem.getUnidadesDisponibles());
             data.add(row);
         }
@@ -94,7 +94,7 @@ public class ListMaterial extends javax.swing.JPanel {
 
     private DefaultTableModel fillMegazine(ConnectionDb connection) {
         Revista megazine = new Revista();
-        List<Revista> megazineList = megazine.seleccionarTodosRevista(connection);
+        List<Revista> megazineList = megazine.SeleccionarTodasRevista(connection);
         Vector<Vector<Object>> data = new Vector<>();
         for (Revista megazineItem : megazineList) {
             Vector<Object> row = new Vector<>();

@@ -4,12 +4,20 @@
  * and open the template in the editor.
  */
 package components;
+import classes.ConnectionDb;
+import classes.Genero;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Oliver-Dev
  */
 public class DvdComponent extends javax.swing.JPanel {
+    private ConnectionDb con = new ConnectionDb();
+    private Genero genero = new Genero();
+    private Map<String, Integer> generoMap = new HashMap<>();
 
     /**
      * Creates new form DvdComponent
@@ -24,8 +32,18 @@ public class DvdComponent extends javax.swing.JPanel {
             btnAgregar.setVisible(false);
             btnModificar.setVisible(true);
         }
+        
+        this.fillGenero();
     }
 
+    private void fillGenero() {
+        cmbGenero.removeAllItems();
+        List<Genero> generoList = genero.seleccionarTodosGeneros(con);
+        for (Genero generoItem: generoList) {
+            cmbGenero.addItem(generoItem.getNombre_genero());
+            generoMap.put(generoItem.getNombre_genero(), generoItem.getId_genero());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

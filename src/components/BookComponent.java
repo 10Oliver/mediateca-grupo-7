@@ -5,28 +5,60 @@
  */
 package components;
 
+import classes.Autor;
+import classes.Editorial;
+import classes.ConnectionDb;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author Oliver-Dev
  */
 public class BookComponent extends javax.swing.JPanel {
+    private ConnectionDb con = new ConnectionDb();
+    private Autor autor = new Autor();
+    private Editorial editorial = new Editorial();
+    private Map<String, Integer> autorMap = new HashMap<>();
+    private Map<String, Integer> editorialMap = new HashMap<>();
 
     /**
      * Creates new form BookComponent
      */
     public BookComponent(int type) {
         initComponents();
+        con.getConnection();
         // 1 is for add, 2 for modify
         if (type == 1) {
             btnAgregar.setVisible(true);
             btnModificar.setVisible(false);
         } else {
-            
             btnAgregar.setVisible(false);
             btnModificar.setVisible(true);
         }
+        this.fillAuthor();
+        this.fillEditorial();
     }
 
+    private void fillAuthor() {
+        // Remove all items
+        cmbAutor.removeAllItems();
+        List<Autor> autorList = autor.seleccionarTodosAutores(con);
+        for (Autor autorItem: autorList) {
+            cmbAutor.addItem(autorItem.getNombre_autor());
+            autorMap.put(autorItem.getNombre_autor(), autorItem.getId_autor());
+        }
+    }
+    
+    private void fillEditorial() {
+        cmbEditorial.removeAllItems();
+        List<Editorial> editorialList = editorial.seleccionarTodosEditoriales(con);
+        for (Editorial editorialItem: editorialList) {
+            cmbEditorial.addItem(editorialItem.getNombre_editorial());
+            editorialMap.put(editorialItem.getNombre_editorial(), editorialItem.getId_editorial());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
