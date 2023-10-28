@@ -60,7 +60,7 @@ public class BookComponent extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1024, 658));
         setPreferredSize(new java.awt.Dimension(1024, 658));
 
-        txtTitulo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTitulo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblTitulo.setText("Titulo");
@@ -68,15 +68,15 @@ public class BookComponent extends javax.swing.JPanel {
         lblAutor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblAutor.setText("Autor");
 
-        cmbAutor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbAutor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         cmbAutor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        txtNumPaginas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNumPaginas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         lblNumPaginas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblNumPaginas.setText("Número de páginas");
 
-        cmbEditorial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbEditorial.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         cmbEditorial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblEditorial.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -85,9 +85,9 @@ public class BookComponent extends javax.swing.JPanel {
         lblISBN.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblISBN.setText("ISBN");
 
-        txtISBN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtISBN.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
-        txtAnioPublicacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtAnioPublicacion.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         lblAñoPubliación.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lblAñoPubliación.setText("Año de publicación");
@@ -97,6 +97,7 @@ public class BookComponent extends javax.swing.JPanel {
         pnlBotonesLayout.rowWeights = new double[] {1.0};
         pnlBotones.setLayout(pnlBotonesLayout);
 
+        pnlAcciones.setBackground(new java.awt.Color(255, 255, 255));
         pnlAcciones.setLayout(new java.awt.GridBagLayout());
 
         btnAgregar.setText("Agregar");

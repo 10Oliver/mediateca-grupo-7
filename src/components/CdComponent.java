@@ -14,8 +14,16 @@ public class CdComponent extends javax.swing.JPanel {
     /**
      * Creates new form CdComponent
      */
-    public CdComponent() {
+    public CdComponent(int type) {
         initComponents();
+        if (type == 1) {
+            btnAgregar.setVisible(true);
+            btnModificar.setVisible(false);
+        } else {
+            
+            btnAgregar.setVisible(false);
+            btnModificar.setVisible(true);
+        }
     }
 
     /**
@@ -26,33 +34,181 @@ public class CdComponent extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblArtista = new javax.swing.JLabel();
+        txtTitulo = new javax.swing.JTextField();
+        cmbArtista = new javax.swing.JComboBox<>();
+        lblDuracion = new javax.swing.JLabel();
+        txtDuracion = new javax.swing.JTextField();
+        lblNumCanciones = new javax.swing.JLabel();
+        txtNumCanciones = new javax.swing.JTextField();
+        lblUnidadesDisponibles = new javax.swing.JLabel();
+        txtUnidadesDisponibles = new javax.swing.JTextField();
+        pnlBotones = new javax.swing.JPanel();
+        pnlAcciones = new javax.swing.JPanel();
+        btnAgregar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        pnlCancelar = new javax.swing.JPanel();
+        btnCancelar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1024, 658));
 
-        jLabel1.setText("CD");
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblTitulo.setText("Titulo");
+
+        lblArtista.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblArtista.setText("Artista");
+
+        txtTitulo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        cmbArtista.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cmbArtista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblDuracion.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblDuracion.setText("Duración");
+
+        txtDuracion.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        lblNumCanciones.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblNumCanciones.setText("Número de canciones");
+
+        txtNumCanciones.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        lblUnidadesDisponibles.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblUnidadesDisponibles.setText("Unidades disponibles");
+
+        txtUnidadesDisponibles.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        pnlBotones.setBackground(new java.awt.Color(255, 255, 255));
+        pnlBotones.setLayout(new java.awt.GridBagLayout());
+
+        pnlAcciones.setBackground(new java.awt.Color(255, 255, 255));
+        pnlAcciones.setLayout(new java.awt.GridBagLayout());
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.setMaximumSize(new java.awt.Dimension(100, 35));
+        btnAgregar.setMinimumSize(new java.awt.Dimension(100, 35));
+        btnAgregar.setPreferredSize(new java.awt.Dimension(100, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        pnlAcciones.add(btnAgregar, gridBagConstraints);
+
+        btnModificar.setText("Modificar");
+        btnModificar.setMaximumSize(new java.awt.Dimension(100, 35));
+        btnModificar.setMinimumSize(new java.awt.Dimension(100, 35));
+        btnModificar.setPreferredSize(new java.awt.Dimension(100, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        pnlAcciones.add(btnModificar, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 30);
+        pnlBotones.add(pnlAcciones, gridBagConstraints);
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setPreferredSize(new java.awt.Dimension(100, 35));
+
+        javax.swing.GroupLayout pnlCancelarLayout = new javax.swing.GroupLayout(pnlCancelar);
+        pnlCancelar.setLayout(pnlCancelarLayout);
+        pnlCancelarLayout.setHorizontalGroup(
+            pnlCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCancelarLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+        pnlCancelarLayout.setVerticalGroup(
+            pnlCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCancelarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
+        pnlBotones.add(pnlCancelar, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(289, 289, 289)
-                .addComponent(jLabel1)
-                .addContainerGap(719, Short.MAX_VALUE))
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUnidadesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUnidadesDisponibles)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDuracion, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(lblDuracion)
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(lblTitulo))
+                        .addGap(165, 165, 165)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblArtista)
+                            .addComponent(cmbArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumCanciones)
+                            .addComponent(txtNumCanciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(89, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(343, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(299, 299, 299))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(lblArtista))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDuracion)
+                    .addComponent(lblNumCanciones))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumCanciones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(lblUnidadesDisponibles)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtUnidadesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JComboBox<String> cmbArtista;
+    private javax.swing.JLabel lblArtista;
+    private javax.swing.JLabel lblDuracion;
+    private javax.swing.JLabel lblNumCanciones;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblUnidadesDisponibles;
+    private javax.swing.JPanel pnlAcciones;
+    private javax.swing.JPanel pnlBotones;
+    private javax.swing.JPanel pnlCancelar;
+    private javax.swing.JTextField txtDuracion;
+    private javax.swing.JTextField txtNumCanciones;
+    private javax.swing.JTextField txtTitulo;
+    private javax.swing.JTextField txtUnidadesDisponibles;
     // End of variables declaration//GEN-END:variables
 }
