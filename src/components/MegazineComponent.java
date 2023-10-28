@@ -7,6 +7,10 @@ package components;
 
 import classes.Revista;
 import classes.ConnectionDb;
+import classes.Editorial;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,8 +18,9 @@ import javax.swing.JOptionPane;
  * @author Oliver-Dev
  */
 public class MegazineComponent extends javax.swing.JPanel {
-
+    private Editorial editorial = new Editorial();
     private ConnectionDb con = new ConnectionDb();
+    private Map<String, Integer> editorialMap = new HashMap<>();
 
     /**
      * Creates new form MegazineComponent
@@ -31,12 +36,21 @@ public class MegazineComponent extends javax.swing.JPanel {
             btnAgregar.setVisible(false);
             btnModificar.setVisible(true);
         }
+        this.fillEditorial();
     }
 
     private boolean checkFields() {
         return txtTitulo.getText().isEmpty() || txtUnidadesDisponibles.getText().isEmpty() || txtPeriodicidad.getText().isEmpty() || txtFechaPublicidad.getText().isEmpty();
     }
 
+     private void fillEditorial() {
+        cmbEditorial.removeAllItems();
+        List<Editorial> editorialList = editorial.seleccionarTodosEditoriales(con);
+        for (Editorial editorialItem: editorialList) {
+            cmbEditorial.addItem(editorialItem.getNombre_editorial());
+            editorialMap.put(editorialItem.getNombre_editorial(), editorialItem.getId_editorial());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
