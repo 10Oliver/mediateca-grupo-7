@@ -5,11 +5,17 @@
  */
 package components;
 
+import classes.Revista;
+import classes.ConnectionDb;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Oliver-Dev
  */
 public class MegazineComponent extends javax.swing.JPanel {
+
+    private ConnectionDb con = new ConnectionDb();
 
     /**
      * Creates new form MegazineComponent
@@ -21,10 +27,14 @@ public class MegazineComponent extends javax.swing.JPanel {
             btnAgregar.setVisible(true);
             btnModificar.setVisible(false);
         } else {
-            
+
             btnAgregar.setVisible(false);
             btnModificar.setVisible(true);
         }
+    }
+
+    private boolean checkFields() {
+        return txtTitulo.getText().isEmpty() || txtUnidadesDisponibles.getText().isEmpty() || txtPeriodicidad.getText().isEmpty() || txtFechaPublicidad.getText().isEmpty();
     }
 
     /**
@@ -226,7 +236,25 @@ public class MegazineComponent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        // TODO add your handling code here:
+        // Instance an object, filling his properties
+        int availableUnits = 0;
+        this.con.getConnection();
+        if (this.checkFields()) {
+            JOptionPane.showMessageDialog(null, "Se deben de llenar todos los campos antes de guardar la revista.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            availableUnits = Integer.parseInt(txtUnidadesDisponibles.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            Revista megazine = new Revista("", txtTitulo.getText(), availableUnits, cmbEditorial.getSelectedItem().toString(), 1, txtPeriodicidad.getText(), txtFechaPublicidad.getText());
+            megazine.insertarRevista(this.con);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
