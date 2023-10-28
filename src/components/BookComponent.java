@@ -55,6 +55,8 @@ public class BookComponent extends javax.swing.JPanel {
         btnModificar = new javax.swing.JButton();
         pnlCancelar = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
+        lblUnidadesDisponibles = new javax.swing.JLabel();
+        txtUnidadesDisponibles = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1024, 658));
@@ -166,6 +168,11 @@ public class BookComponent extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
         pnlBotones.add(pnlCancelar, gridBagConstraints);
 
+        lblUnidadesDisponibles.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblUnidadesDisponibles.setText("Unidades disponibles");
+
+        txtUnidadesDisponibles.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,13 +182,15 @@ public class BookComponent extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                             .addComponent(lblTitulo)
-                            .addComponent(txtNumPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumPaginas, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                             .addComponent(lblNumPaginas)
-                            .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblISBN))
+                            .addComponent(txtISBN, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(lblISBN)
+                            .addComponent(lblUnidadesDisponibles)
+                            .addComponent(txtUnidadesDisponibles))
                         .addGap(124, 124, 124)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblAñoPubliación)
@@ -219,7 +228,11 @@ public class BookComponent extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAnioPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(lblUnidadesDisponibles)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUnidadesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
@@ -250,6 +263,7 @@ public class BookComponent extends javax.swing.JPanel {
     private javax.swing.JLabel lblISBN;
     private javax.swing.JLabel lblNumPaginas;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblUnidadesDisponibles;
     private javax.swing.JPanel pnlAcciones;
     private javax.swing.JPanel pnlBotones;
     private javax.swing.JPanel pnlCancelar;
@@ -257,5 +271,6 @@ public class BookComponent extends javax.swing.JPanel {
     private javax.swing.JTextField txtISBN;
     private javax.swing.JTextField txtNumPaginas;
     private javax.swing.JTextField txtTitulo;
+    private javax.swing.JTextField txtUnidadesDisponibles;
     // End of variables declaration//GEN-END:variables
 }
