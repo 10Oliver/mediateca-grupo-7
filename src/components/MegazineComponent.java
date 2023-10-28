@@ -250,7 +250,7 @@ public class MegazineComponent extends javax.swing.JPanel {
         }
         try {
             Revista megazine = new Revista("", txtTitulo.getText(), availableUnits, cmbEditorial.getSelectedItem().toString(), 1, txtPeriodicidad.getText(), txtFechaPublicidad.getText());
-            megazine.insertarRevista(this.con);
+            megazine.insertRevista(con, cmbEditorial.getSelectedIndex());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
         }
