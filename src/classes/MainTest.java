@@ -21,12 +21,12 @@ public class MainTest {
 
         // Cd cd = new Cd("1", "Best of Pop", 15, "Pop", "2 hours", 1, "Various Artists", 20);
 //        Cd cd = new Cd("");
-Cd cds = new Cd();
-        List<Cd> cdShow = cds.seleccionarTodosCds(conexion);
+Libro cds = new Libro();
+        List<Libro> cdShow = cds.seleccionarTodosLibro(conexion);
 
-        for (Cd cdShower : cdShow) {
-                System.out.println("Duracion: "+cdShower.getDuracion());
-                System.out.println("Titulo: "+cdShower.getTitulo());
+        for (Libro cdShower : cdShow) {
+                System.out.println("Duracion: "+cdShower.getEditorial());
+                System.out.println("Titulo: "+cdShower.getNombreAutor());
                 System.out.println("Unidades Disponibles :"+cdShower.getUnidadesDisponibles());
             System.out.println("");
             System.out.println("");
