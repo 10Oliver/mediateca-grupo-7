@@ -93,6 +93,11 @@ public class CdComponent extends javax.swing.JPanel {
         btnAgregar.setMaximumSize(new java.awt.Dimension(100, 35));
         btnAgregar.setMinimumSize(new java.awt.Dimension(100, 35));
         btnAgregar.setPreferredSize(new java.awt.Dimension(100, 35));
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -104,6 +109,11 @@ public class CdComponent extends javax.swing.JPanel {
         btnModificar.setMaximumSize(new java.awt.Dimension(100, 35));
         btnModificar.setMinimumSize(new java.awt.Dimension(100, 35));
         btnModificar.setPreferredSize(new java.awt.Dimension(100, 35));
+        btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -120,6 +130,11 @@ public class CdComponent extends javax.swing.JPanel {
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(100, 35));
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCancelarLayout = new javax.swing.GroupLayout(pnlCancelar);
         pnlCancelar.setLayout(pnlCancelarLayout);
@@ -194,6 +209,18 @@ public class CdComponent extends javax.swing.JPanel {
                 .addGap(122, 122, 122))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarMouseClicked
+
+    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
