@@ -4,18 +4,30 @@
  * and open the template in the editor.
  */
 package components;
+import classes.ConnectionDb;
+import classes.Artista;
+import classes.Genero;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Oliver-Dev
  */
 public class CdComponent extends javax.swing.JPanel {
+    private ConnectionDb con = new ConnectionDb();
+    private Artista artista = new Artista();
+    private Genero genero = new Genero();
+    private Map<String, Integer> artistaMap = new HashMap<>();
+    private Map<String, Integer> generoMap = new HashMap<>();
 
     /**
      * Creates new form CdComponent
      */
     public CdComponent(int type) {
         initComponents();
+        con.getConnection();
         if (type == 1) {
             btnAgregar.setVisible(true);
             btnModificar.setVisible(false);
@@ -23,6 +35,26 @@ public class CdComponent extends javax.swing.JPanel {
             
             btnAgregar.setVisible(false);
             btnModificar.setVisible(true);
+        }
+        this.fillArista();
+        this.fillGenero();
+    }
+    
+    private void fillArista() {
+        cmbArtista.removeAllItems();
+        List<Artista> artistaList = artista.seleccionarTodosArtistas(con);
+        for (Artista artistaItem: artistaList) {
+            cmbArtista.addItem(artistaItem.getNombre_artista());
+            artistaMap.put(artistaItem.getNombre_artista(), artistaItem.getId_artista());
+        }
+    }
+    
+    private void fillGenero() {
+        cmbGenero.removeAllItems();
+        List<Genero> generoList = genero.seleccionarTodosGeneros(con);
+        for (Genero generoItem: generoList) {
+            cmbGenero.addItem(generoItem.getNombre_genero());
+            generoMap.put(generoItem.getNombre_genero(), generoItem.getId_genero());
         }
     }
 
