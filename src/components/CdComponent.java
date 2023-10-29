@@ -275,7 +275,7 @@ public class CdComponent extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
         }
         try {
-            Dvd dvd = new Dvd("", txtTitulo.getText(), availableUnits, cmbGenero.getSelectedItem().toString(), 1, txtDirector.getText(), txtDuracion.getText().toString());
+            CD dvd = new Dvd("", txtTitulo.getText(), availableUnits, cmbGenero.getSelectedItem().toString(), 1, txtDirector.getText(), txtDuracion.getText().toString());
             dvd.updateCD(con, cmbGenero.getSelectedIndex());
             JOptionPane.showMessageDialog(null, "Los cambios se han realizado exitosamente.", "Dato modificado", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
