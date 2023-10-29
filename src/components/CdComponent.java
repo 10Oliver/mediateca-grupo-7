@@ -7,9 +7,11 @@ package components;
 import classes.ConnectionDb;
 import classes.Artista;
 import classes.Genero;
+import classes.Cd;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,6 +58,18 @@ public class CdComponent extends javax.swing.JPanel {
             cmbGenero.addItem(generoItem.getNombre_genero());
             generoMap.put(generoItem.getNombre_genero(), generoItem.getId_genero());
         }
+    }
+    
+    
+    private boolean checkFields() {
+        return txtTitulo.getText().isEmpty() || txtUnidadesDisponibles.getText().isEmpty() || txtDuracion.getText().isEmpty() || txtNumCanciones.getText().isEmpty();
+    }
+    
+    private void cleanFields() {
+        txtTitulo.setText("");
+        txtUnidadesDisponibles.setText("");
+        txtNumCanciones.setText("");
+        txtDuracion.setText("");
     }
 
     /**
@@ -259,7 +273,45 @@ public class CdComponent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        // TODO add your handling code here:
+        int availableUnits = 0;
+        int numCanciones = 0;
+        int duracion = 0;
+        this.con.getConnection();
+        if (this.checkFields()) {
+            JOptionPane.showMessageDialog(null, "Se deben de llenar todos los campos antes de guardar la revista.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        // Check conversion
+        try {
+            availableUnits = Integer.parseInt(txtUnidadesDisponibles.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            duracion = Integer.parseInt(txtDuracion.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La duración debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            numCanciones = Integer.parseInt(txtNumCanciones.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El número de canciones debe ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        // Save cd
+        try {
+            Cd cd = new Cd();
+            // Set values
+            cd.setTitulo(txtTitulo.getText());
+            cd.setDuracion(String.valueOf(duracion) + "mins");
+            cd.setNum_canciones(numCanciones);
+            cd.setUnidadesDisponibles(availableUnits);
+            // Insert cd
+            cd.insertCD(con, artistaMap.get(cmbArtista.getSelectedItem().toString()), generoMap.get(cmbGenero.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(null, "El CD se ha guardo correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            this.cleanFields();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
