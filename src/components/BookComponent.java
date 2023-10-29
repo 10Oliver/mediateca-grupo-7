@@ -8,9 +8,11 @@ package components;
 import classes.Autor;
 import classes.Editorial;
 import classes.ConnectionDb;
+import classes.Dvd;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -275,7 +277,22 @@ public class BookComponent extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        // TODO add your handling code here:
+        if (this.checkFields()) {
+            JOptionPane.showMessageDialog(null, "Se deben de seleccionar todos los campos antes de editar y guardar el DVD.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            availableUnits = Integer.parseInt(txtUnidadesDisponibles.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            Dvd dvd = new Dvd("", txtTitulo.getText(), availableUnits, cmbGenero.getSelectedItem().toString(), 1, txtDirector.getText(), txtDuracion.getText().toString());
+            dvd.updateBook(con, cmbGenero.getSelectedIndex());
+            JOptionPane.showMessageDialog(null, "Los cambios se han realizado exitosamente.", "Dato modificado", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
