@@ -4,17 +4,21 @@
  * and open the template in the editor.
  */
 package components;
+
 import classes.ConnectionDb;
+import classes.Dvd;
 import classes.Genero;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Oliver-Dev
  */
 public class DvdComponent extends javax.swing.JPanel {
+
     private ConnectionDb con = new ConnectionDb();
     private Genero genero = new Genero();
     private Map<String, Integer> generoMap = new HashMap<>();
@@ -28,22 +32,27 @@ public class DvdComponent extends javax.swing.JPanel {
             btnAgregar.setVisible(true);
             btnModificar.setVisible(false);
         } else {
-            
+
             btnAgregar.setVisible(false);
             btnModificar.setVisible(true);
         }
-        
+
         this.fillGenero();
+    }
+
+    private boolean checkFields() {
+        return txtTitulo.getText().isEmpty() || txtUnidadesDisponibles.getText().isEmpty() || txtDirector.getText().isEmpty() || txtDuracion.getText().isEmpty();
     }
 
     private void fillGenero() {
         cmbGenero.removeAllItems();
         List<Genero> generoList = genero.seleccionarTodosGeneros(con);
-        for (Genero generoItem: generoList) {
+        for (Genero generoItem : generoList) {
             cmbGenero.addItem(generoItem.getNombre_genero());
             generoMap.put(generoItem.getNombre_genero(), generoItem.getId_genero());
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -247,7 +256,24 @@ public class DvdComponent extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        // TODO add your handling code here:
+        this.con.getConnection();
+        int availableUnits = 0;
+        if (this.checkFields()) {
+            JOptionPane.showMessageDialog(null, "Se deben de seleccionar todos los campos antes de editar y guardar el DVD.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            availableUnits = Integer.parseInt(txtUnidadesDisponibles.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            Dvd dvd = new Dvd("", txtTitulo.getText(), availableUnits, cmbGenero.getSelectedItem().toString(), 1, txtDirector.getText(), txtDuracion.getText().toString());
+            dvd.updateDVD(con, cmbGenero.getSelectedIndex());
+            JOptionPane.showMessageDialog(null, "Los cambios se han realizado exitosamente.", "Dato modificado", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
