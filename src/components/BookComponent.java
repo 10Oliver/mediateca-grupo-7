@@ -8,9 +8,11 @@ package components;
 import classes.Autor;
 import classes.Editorial;
 import classes.ConnectionDb;
+import classes.Libro;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,6 +61,19 @@ public class BookComponent extends javax.swing.JPanel {
             editorialMap.put(editorialItem.getNombre_editorial(), editorialItem.getId_editorial());
         }
     }
+    
+    private boolean checkFields() {
+        return txtTitulo.getText().isEmpty() || txtUnidadesDisponibles.getText().isEmpty() || txtAnioPublicacion.getText().isEmpty() || txtISBN.getText().isEmpty() || txtNumPaginas.getText().isEmpty();
+    }
+    
+    private void cleanFields() {
+        txtTitulo.setText("");
+        txtUnidadesDisponibles.setText("");
+        txtAnioPublicacion.setText("");
+        txtISBN.setText("");
+        txtNumPaginas.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -271,7 +286,54 @@ public class BookComponent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        // TODO add your handling code here:
+        int availableUnits = 0;
+        int NumPages = 0;
+        int ISBN = 0;
+        int anioPublication = 0;
+        this.con.getConnection();
+        if (this.checkFields()) {
+            JOptionPane.showMessageDialog(null, "Se deben de llenar todos los campos antes de guardar la revista.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        // Check conversion
+        try {
+            availableUnits = Integer.parseInt(txtUnidadesDisponibles.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            ISBN = Integer.parseInt(txtISBN.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El ISBN debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            anioPublication = Integer.parseInt(txtAnioPublicacion.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El año de publicación debe de contener un año válido.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            NumPages = Integer.parseInt(txtNumPaginas.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El número de páginas debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        // Insert book
+        try {
+            Libro book = new Libro( );
+            // Set values
+            book.setTitulo(txtTitulo.getText());
+            book.setNumPaginas(NumPages);
+            book.setISBN(ISBN);
+            book.setAnioPublicacion(anioPublication);
+            book.setUnidadesDisponibles(availableUnits);
+            
+            // Save book
+            book.insertarLibro(con, autorMap.get(cmbAutor.getSelectedItem().toString()), editorialMap.get(cmbEditorial.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(null, "El libro se ha guardo correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            // Clean fields
+            this.cleanFields();
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
