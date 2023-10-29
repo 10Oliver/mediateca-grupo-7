@@ -79,18 +79,21 @@ public class Dvd extends MaterialAudiovisual {
             e.printStackTrace();
         }
     }
-    public void deleteDVD(ConnectionDb connection) {
+    public boolean borrarDvd(ConnectionDb connection) {
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(DELETE_STATEMENT);
             statement.setString(1, getCodigoIdentificacion());
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("DVD was deleted successfully!");
+                return true;
             }
         } catch (SQLException e) {
             System.out.println("Error occurred while deleting DVD: " + e.getMessage());
             e.printStackTrace();
+            return false;
         }
+        return false;
     }
     public Dvd seleccionarDvd(String codigoIdentificacion, ConnectionDb connection) {
         Dvd dvd = null;

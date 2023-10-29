@@ -136,7 +136,7 @@ public class Cd extends MaterialAudiovisual {
         }
         return cds;
     }
-    public void deleteCD(ConnectionDb connection) {
+    public boolean borrarCd(ConnectionDb connection) {
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(DELETE_STATEMENT);
             statement.setString(1, getCodigoIdentificacion());
@@ -150,7 +150,8 @@ public class Cd extends MaterialAudiovisual {
             System.out.println("Error occurred while deleting CD: " + e.getMessage());
             e.printStackTrace();
         }
+        return false;
     }
 
+ }
 
-}
