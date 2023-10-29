@@ -143,6 +143,7 @@ public class Cd extends MaterialAudiovisual {
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("CD deleted successfully.");
+                return true;
             } else {
                 System.out.println("CD with id " + getCodigoIdentificacion() + " not found.");
             }

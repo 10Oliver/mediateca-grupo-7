@@ -138,8 +138,6 @@ public class DeleteMaterial extends javax.swing.JPanel {
                     .addComponent(btnRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(375, 375, 375))
         );
-
-        btnRegresar.getAccessibleContext().setAccessibleName("Regresar");
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -159,6 +157,7 @@ public class DeleteMaterial extends javax.swing.JPanel {
                     Libro libro = new Libro(codigoIdentificacion);
                     if (libro.borrarLibro(conexion)) {
                         JOptionPane.showMessageDialog(this, "El libro ha sido eliminado correctamente.");
+                        txtCodigo.setText("");
                     } else {
                         JOptionPane.showMessageDialog(this, "Error al eliminar el libro. Verifica el código de identificación.");
                     }
@@ -167,6 +166,7 @@ public class DeleteMaterial extends javax.swing.JPanel {
                     Revista revista = new Revista(codigoIdentificacion);
                     if (revista.borrarRevista(conexion)) {
                         JOptionPane.showMessageDialog(this, "La revista ha sido eliminada correctamente.");
+                        txtCodigo.setText("");
                     } else {
                         JOptionPane.showMessageDialog(this, "Error al eliminar la revista. Verifica el código de identificación.");
                     }
@@ -175,6 +175,7 @@ public class DeleteMaterial extends javax.swing.JPanel {
                     Cd cd = new Cd(codigoIdentificacion);
                     if (cd.borrarCd(conexion)) {
                         JOptionPane.showMessageDialog(this, "El CD ha sido eliminado correctamente.");
+                        txtCodigo.setText("");
                     } else {
                         JOptionPane.showMessageDialog(this, "Error al eliminar el CD. Verifica el código de identificación.");
                     }
@@ -183,6 +184,7 @@ public class DeleteMaterial extends javax.swing.JPanel {
                     Dvd dvd = new Dvd(codigoIdentificacion);
                     if (dvd.borrarDvd(conexion)) {
                         JOptionPane.showMessageDialog(this, "El DVD ha sido eliminado correctamente.");
+                        txtCodigo.setText("");
                     } else {
                         JOptionPane.showMessageDialog(this, "Error al eliminar el DVD. Verifica el código de identificación.");
                     }
