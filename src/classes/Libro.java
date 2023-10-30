@@ -103,20 +103,17 @@ public class Libro extends MaterialEscrito{
         }
         return libro;
     }
-    public boolean borrarLibro(ConnectionDb conexion) {
+    public void borrarLibro(ConnectionDb conexion) {
         try {
             PreparedStatement statement = conexion.getConnection().prepareStatement(DELETE_STATEMENT);
             statement.setString(1, this.getCodigoIdentificacion());
             statement.executeUpdate();
             System.out.println("Libro eliminado correctamente.");
-            return true;
         } catch (SQLException e) {
             System.out.println("Error al eliminar el libro de la base de datos.");
             e.printStackTrace();
-            return false;
         }
     }
-   
     public void updateLibro(ConnectionDb connection,int idAutor,int idEditorial) {
 
         try {

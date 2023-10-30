@@ -91,17 +91,16 @@ public class Revista extends MaterialEscrito {
                 }
         }
 
-        public boolean borrarRevista(ConnectionDb connection) {
+        public void deleteRevista(ConnectionDb connection) {
                 try {
                         PreparedStatement statement = connection.getConnection().prepareStatement(DELETE_STATEMENT);
                         statement.setString(1, getCodigoIdentificacion());
+
                         statement.executeUpdate();
                         System.out.println("Revista deleted successfully.");
-                        return true;
                 } catch (SQLException e) {
                         System.out.println("Error occurred while deleting revista: " + e.getMessage());
                         e.printStackTrace();
-                        return false;
                 }
         }
         public Revista SeleccionarRevista(ConnectionDb connection){

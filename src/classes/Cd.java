@@ -136,14 +136,13 @@ public class Cd extends MaterialAudiovisual {
         }
         return cds;
     }
-    public boolean borrarCd(ConnectionDb connection) {
+    public void deleteCD(ConnectionDb connection) {
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(DELETE_STATEMENT);
             statement.setString(1, getCodigoIdentificacion());
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("CD deleted successfully.");
-                return true;
             } else {
                 System.out.println("CD with id " + getCodigoIdentificacion() + " not found.");
             }
@@ -151,8 +150,7 @@ public class Cd extends MaterialAudiovisual {
             System.out.println("Error occurred while deleting CD: " + e.getMessage());
             e.printStackTrace();
         }
-        return false;
     }
 
- }
 
+}

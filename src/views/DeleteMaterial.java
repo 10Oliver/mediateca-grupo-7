@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package views;
+
 import javax.swing.JOptionPane;
 import classes.Cd;
 import classes.ConnectionDb;
@@ -11,8 +12,6 @@ import classes.Dvd;
 import classes.Libro;
 import classes.Revista;
 import javax.swing.JPanel;
-
-
 
 /**
  *
@@ -30,7 +29,7 @@ public class DeleteMaterial extends javax.swing.JPanel {
         this.material = materialOption;
         this.mainPanel = containerPanel;
         initComponents();
-        
+
         switch (this.material) {
             case 1:
                 lblMaterial.setText("Material seleccionado: Libro");
@@ -42,14 +41,14 @@ public class DeleteMaterial extends javax.swing.JPanel {
                 break;
             case 3:
                 lblMaterial.setText("Material seleccionado: CD");
-                 lblCodigo.setText("Escriba el código del CD que desea eliminar:");
+                lblCodigo.setText("Escriba el código del CD que desea eliminar:");
                 break;
             case 4:
                 lblMaterial.setText("Material seleccionado: DVD");
                 lblCodigo.setText("Escriba el código del DVD que desea eliminar:");
                 break;
         }
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -142,67 +141,73 @@ public class DeleteMaterial extends javax.swing.JPanel {
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // TODO add your handling code here:
-       String codigoIdentificacion = txtCodigo.getText().trim();
-       
-       if (codigoIdentificacion.isEmpty()) {
+        String codigoIdentificacion = txtCodigo.getText().trim();
+
+        if (codigoIdentificacion.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingresa un código de identificación.");
             return;
         }
-         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este material?");
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este material?");
 
         if (confirmacion == JOptionPane.YES_OPTION) {
             ConnectionDb conexion = new ConnectionDb(); // Reemplaza esto por la creación de tu instancia de ConnectionDb
             switch (material) {
                 case 1: // Libro
-                    Libro libro = new Libro(codigoIdentificacion);
-                    if (libro.borrarLibro(conexion)) {
+                    try {
+                        Libro libro = new Libro(codigoIdentificacion);
+                        libro.borrarLibro(conexion);
                         JOptionPane.showMessageDialog(this, "El libro ha sido eliminado correctamente.");
                         txtCodigo.setText("");
-                    } else {
+                    } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, "Error al eliminar el libro. Verifica el código de identificación.");
                     }
+
                     break;
                 case 2: // Revista
-                    Revista revista = new Revista(codigoIdentificacion);
-                    if (revista.borrarRevista(conexion)) {
+                    try {
+                        Revista revista = new Revista(codigoIdentificacion);
+                        revista.deleteRevista(conexion);
                         JOptionPane.showMessageDialog(this, "La revista ha sido eliminada correctamente.");
                         txtCodigo.setText("");
-                    } else {
+                    } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, "Error al eliminar la revista. Verifica el código de identificación.");
                     }
                     break;
                 case 3: // CD
-                    Cd cd = new Cd(codigoIdentificacion);
-                    if (cd.borrarCd(conexion)) {
+                    try {
+                        Cd cd = new Cd(codigoIdentificacion);
+                        cd.deleteCD(conexion);
                         JOptionPane.showMessageDialog(this, "El CD ha sido eliminado correctamente.");
                         txtCodigo.setText("");
-                    } else {
+                    } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, "Error al eliminar el CD. Verifica el código de identificación.");
                     }
+
                     break;
                 case 4: // DVD
-                    Dvd dvd = new Dvd(codigoIdentificacion);
-                    if (dvd.borrarDvd(conexion)) {
+                    try {
+                        Dvd dvd = new Dvd(codigoIdentificacion);
+                        dvd.deleteDVD(conexion);
                         JOptionPane.showMessageDialog(this, "El DVD ha sido eliminado correctamente.");
                         txtCodigo.setText("");
-                    } else {
+                    } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, "Error al eliminar el DVD. Verifica el código de identificación.");
                     }
                     break;
             }
-        }   
+        }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         mainPanel.removeAll();
-        MaterialOptions materialOptions = new MaterialOptions(3, mainPanel); 
+        MaterialOptions materialOptions = new MaterialOptions(3, mainPanel);
         materialOptions.setSize(1024, 720);
         mainPanel.add(materialOptions);
         mainPanel.revalidate();
         mainPanel.repaint();
     }//GEN-LAST:event_btnRegresarActionPerformed
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnRegresar;
