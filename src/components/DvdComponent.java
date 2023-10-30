@@ -73,6 +73,13 @@ public class DvdComponent extends javax.swing.JPanel {
     private boolean checkFields() {
         return txtTitulo.getText().isEmpty() || txtUnidadesDisponibles.getText().isEmpty() || txtDirector.getText().isEmpty() || txtDuracion.getText().isEmpty();
     }
+    
+    private void cleanFields() {
+        txtTitulo.setText("");
+        txtUnidadesDisponibles.setText("");
+        txtDirector.setText("");
+        txtDuracion.setText("");
+    }
 
     private void fillGenero() {
         cmbGenero.removeAllItems();
@@ -282,7 +289,38 @@ public class DvdComponent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        // TODO add your handling code here:
+        int availableUnits = 0;
+        int duracion = 0;
+        this.con.getConnection();
+        if (this.checkFields()) {
+            JOptionPane.showMessageDialog(null, "Se deben de llenar todos los campos antes de guardar la revista.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        // Check type value conversion
+        try {
+            availableUnits = Integer.parseInt(txtUnidadesDisponibles.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            duracion = Integer.parseInt(txtDuracion.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La duración debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        // Save dvd
+        try {
+            Dvd dvd = new Dvd();
+            dvd.setTitulo(txtTitulo.getText());
+            dvd.setDirector(txtDirector.getText());
+            dvd.setDuracion(String.valueOf(duracion) + "min");
+            dvd.setUnidadesDisponibles(availableUnits);
+            // Insert new dvd
+            dvd.insertDVD(con, generoMap.get(cmbGenero.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(null, "El DVD se ha guardo correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            this.cleanFields();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
