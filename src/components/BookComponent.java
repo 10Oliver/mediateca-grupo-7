@@ -9,16 +9,21 @@ import classes.Autor;
 import classes.Editorial;
 import classes.ConnectionDb;
 import classes.Libro;
+import java.awt.GridLayout;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Oliver-Dev
  */
 public class BookComponent extends javax.swing.JPanel {
+    private String IdentificationCode = "";
     private ConnectionDb con = new ConnectionDb();
     private Autor autor = new Autor();
     private Editorial editorial = new Editorial();
@@ -38,34 +43,64 @@ public class BookComponent extends javax.swing.JPanel {
         } else {
             btnAgregar.setVisible(false);
             btnModificar.setVisible(true);
+            do {
+                this.fillView();
+            } while (this.IdentificationCode == "");
         }
         this.fillAuthor();
         this.fillEditorial();
+    }
+
+    private void fillView() {
+        JPanel optionPanel = new JPanel(new GridLayout(2, 1));
+        JTextField txtIdentificationCode = new JTextField();
+        optionPanel.add(new JLabel("Escribe el código de identificación:"));
+        optionPanel.add(txtIdentificationCode);
+        JOptionPane.showConfirmDialog(null, optionPanel, "Ingrese los datos", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        // Check if input is empty
+        if (txtIdentificationCode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debes de ingresar un código.", "Existen campos vacíos", JOptionPane.INFORMATION_MESSAGE);
+        }
+        // Search for specific dvd
+        Libro book = new Libro(txtIdentificationCode.getText());
+        Libro bookSelected = book.seleccionarLibro(con);
+        if (bookSelected == null) {
+            JOptionPane.showMessageDialog(null, "No existe ningún dvd con el código proporcionado.", "Registro inexistente", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        txtTitulo.setText(bookSelected.getTitulo());
+        txtUnidadesDisponibles.setText(String.valueOf(bookSelected.getUnidadesDisponibles()));
+        txtAnioPublicacion.setText(String.valueOf(bookSelected.getAnioPublicacion()));
+        txtISBN.setText(String.valueOf(bookSelected.getISBN()));
+        txtNumPaginas.setText(String.valueOf(bookSelected.getNumPaginas()));
+        cmbEditorial.setSelectedItem(bookSelected.getEditorial());
+        cmbAutor.setSelectedItem(bookSelected.getNombreAutor());
+        IdentificationCode = txtIdentificationCode.getText();
     }
 
     private void fillAuthor() {
         // Remove all items
         cmbAutor.removeAllItems();
         List<Autor> autorList = autor.seleccionarTodosAutores(con);
-        for (Autor autorItem: autorList) {
+        for (Autor autorItem : autorList) {
             cmbAutor.addItem(autorItem.getNombre_autor());
             autorMap.put(autorItem.getNombre_autor(), autorItem.getId_autor());
         }
     }
-    
+
     private void fillEditorial() {
         cmbEditorial.removeAllItems();
         List<Editorial> editorialList = editorial.seleccionarTodosEditoriales(con);
-        for (Editorial editorialItem: editorialList) {
+        for (Editorial editorialItem : editorialList) {
             cmbEditorial.addItem(editorialItem.getNombre_editorial());
             editorialMap.put(editorialItem.getNombre_editorial(), editorialItem.getId_editorial());
         }
     }
-    
+
     private boolean checkFields() {
         return txtTitulo.getText().isEmpty() || txtUnidadesDisponibles.getText().isEmpty() || txtAnioPublicacion.getText().isEmpty() || txtISBN.getText().isEmpty() || txtNumPaginas.getText().isEmpty();
     }
-    
+
     private void cleanFields() {
         txtTitulo.setText("");
         txtUnidadesDisponibles.setText("");
@@ -73,7 +108,7 @@ public class BookComponent extends javax.swing.JPanel {
         txtISBN.setText("");
         txtNumPaginas.setText("");
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -290,7 +325,6 @@ public class BookComponent extends javax.swing.JPanel {
         int NumPages = 0;
         int ISBN = 0;
         int anioPublication = 0;
-        this.con.getConnection();
         if (this.checkFields()) {
             JOptionPane.showMessageDialog(null, "Se deben de llenar todos los campos antes de guardar la revista.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
             return;
@@ -318,7 +352,56 @@ public class BookComponent extends javax.swing.JPanel {
         }
         // Insert book
         try {
-            Libro book = new Libro( );
+            Libro book = new Libro();
+            // Set values
+            book.setTitulo(txtTitulo.getText());
+            book.setNumPaginas(NumPages);
+            book.setISBN(ISBN);
+            book.setAnioPublicacion(anioPublication);
+            book.setUnidadesDisponibles(availableUnits);
+
+            // Save book
+            book.insertarLibro(con, autorMap.get(cmbAutor.getSelectedItem().toString()), editorialMap.get(cmbEditorial.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(null, "El libro se ha guardo correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            // Clean fields
+            this.cleanFields();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
+        int availableUnits = 0;
+        int NumPages = 0;
+        int ISBN = 0;
+        int anioPublication = 0;
+        if (this.checkFields()) {
+            JOptionPane.showMessageDialog(null, "Se deben de llenar todos los campos antes de guardar la revista.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        // Check conversion
+        try {
+            availableUnits = Integer.parseInt(txtUnidadesDisponibles.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            ISBN = Integer.parseInt(txtISBN.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El ISBN debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            anioPublication = Integer.parseInt(txtAnioPublicacion.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El año de publicación debe de contener un año válido.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            NumPages = Integer.parseInt(txtNumPaginas.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El número de páginas debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            Libro book = new Libro(IdentificationCode);
             // Set values
             book.setTitulo(txtTitulo.getText());
             book.setNumPaginas(NumPages);
@@ -326,18 +409,13 @@ public class BookComponent extends javax.swing.JPanel {
             book.setAnioPublicacion(anioPublication);
             book.setUnidadesDisponibles(availableUnits);
             
-            // Save book
-            book.insertarLibro(con, autorMap.get(cmbAutor.getSelectedItem().toString()), editorialMap.get(cmbEditorial.getSelectedItem().toString()));
-            JOptionPane.showMessageDialog(null, "El libro se ha guardo correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            book.updateLibro(con, autorMap.get(cmbAutor.getSelectedItem().toString()), editorialMap.get(cmbEditorial.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(null, "El libro se ha actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             // Clean fields
             this.cleanFields();
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al modificar", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnAgregarMouseClicked
-
-    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
