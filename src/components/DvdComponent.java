@@ -22,6 +22,7 @@ import javax.swing.JTextField;
  * @author Oliver-Dev
  */
 public class DvdComponent extends javax.swing.JPanel {
+
     private String IdentificationCode = "";
     private ConnectionDb con = new ConnectionDb();
     private Genero genero = new Genero();
@@ -45,8 +46,8 @@ public class DvdComponent extends javax.swing.JPanel {
 
         this.fillGenero();
     }
-    
-        private void fillView() {
+
+    private void fillView() {
         JPanel optionPanel = new JPanel(new GridLayout(2, 1));
         JTextField txtIdentificationCode = new JTextField();
         optionPanel.add(new JLabel("Escribe el código de identificación:"));
@@ -55,6 +56,7 @@ public class DvdComponent extends javax.swing.JPanel {
         // Check if input is empty
         if (txtIdentificationCode.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debes de ingresar un código.", "Existen campos vacíos", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
         // Search for specific dvd
         Dvd dvd = new Dvd();
@@ -73,7 +75,7 @@ public class DvdComponent extends javax.swing.JPanel {
     private boolean checkFields() {
         return txtTitulo.getText().isEmpty() || txtUnidadesDisponibles.getText().isEmpty() || txtDirector.getText().isEmpty() || txtDuracion.getText().isEmpty();
     }
-    
+
     private void cleanFields() {
         txtTitulo.setText("");
         txtUnidadesDisponibles.setText("");
