@@ -1,7 +1,5 @@
 package classes;
 
-import java.util.List;
-
 public class MainTest {
 
     public static void main(String[] args) {
@@ -21,16 +19,16 @@ public class MainTest {
 
         // Cd cd = new Cd("1", "Best of Pop", 15, "Pop", "2 hours", 1, "Various Artists", 20);
 //        Cd cd = new Cd("");
-Libro cds = new Libro();
-        List<Libro> cdShow = cds.seleccionarTodosLibro(conexion);
+// Cd cds = new Cd();
+        // List<Cd> cdShow = cds.seleccionarTodosCds(conexion);
 
-        for (Libro cdShower : cdShow) {
-                System.out.println("Duracion: "+cdShower.getEditorial());
-                System.out.println("Titulo: "+cdShower.getNombreAutor());
-                System.out.println("Unidades Disponibles :"+cdShower.getUnidadesDisponibles());
-            System.out.println("");
-            System.out.println("");
-        }
+        // for (Cd cdShower : cdShow) {
+        //         System.out.println("Duracion: "+cdShower.getDuracion());
+        //         System.out.println("Titulo: "+cdShower.getTitulo());
+        //         System.out.println("Unidades Disponibles :"+cdShower.getUnidadesDisponibles());
+        //     System.out.println("");
+        //     System.out.println("");
+        // }
         // cd.insertarCd(conexion);
         // cd.seleccionarCd(conexion, cd.getCodigoIdentificacion());
         // cd.actualizarCd(conexion);
