@@ -8,17 +8,21 @@ package components;
 import classes.ConnectionDb;
 import classes.Dvd;
 import classes.Genero;
+import java.awt.GridLayout;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Oliver-Dev
  */
 public class DvdComponent extends javax.swing.JPanel {
-
+    private String IdentificationCode = "";
     private ConnectionDb con = new ConnectionDb();
     private Genero genero = new Genero();
     private Map<String, Integer> generoMap = new HashMap<>();
@@ -32,12 +36,38 @@ public class DvdComponent extends javax.swing.JPanel {
             btnAgregar.setVisible(true);
             btnModificar.setVisible(false);
         } else {
-
             btnAgregar.setVisible(false);
             btnModificar.setVisible(true);
+            do {
+                this.fillView();
+            } while (this.IdentificationCode == "");
         }
 
         this.fillGenero();
+    }
+    
+        private void fillView() {
+        JPanel optionPanel = new JPanel(new GridLayout(2, 1));
+        JTextField txtIdentificationCode = new JTextField();
+        optionPanel.add(new JLabel("Escribe el código de identificación:"));
+        optionPanel.add(txtIdentificationCode);
+        JOptionPane.showConfirmDialog(null, optionPanel, "Ingrese los datos", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        // Check if input is empty
+        if (txtIdentificationCode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debes de ingresar un código.", "Existen campos vacíos", JOptionPane.INFORMATION_MESSAGE);
+        }
+        // Search for specific dvd
+        Dvd dvd = new Dvd();
+        Dvd dvdSelected = dvd.seleccionarDvd(txtIdentificationCode.getText(), con);
+        if (dvdSelected == null) {
+            JOptionPane.showMessageDialog(null, "No existe ningún dvd con el código proporcionado.", "Registro inexistente", JOptionPane.INFORMATION_MESSAGE);
+        }
+        txtTitulo.setText(dvdSelected.getTitulo());
+        txtUnidadesDisponibles.setText(String.valueOf(dvdSelected.getUnidadesDisponibles()));
+        txtDirector.setText(dvdSelected.getDirector());
+        txtDuracion.setText(dvdSelected.getDuracion());
+        cmbGenero.setSelectedItem(dvdSelected.getGenero());
+        IdentificationCode = txtIdentificationCode.getText();
     }
 
     private boolean checkFields() {
@@ -268,9 +298,9 @@ public class DvdComponent extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
         }
         try {
-            Dvd dvd = new Dvd("", txtTitulo.getText(), availableUnits, cmbGenero.getSelectedItem().toString(), 1, txtDirector.getText(), txtDuracion.getText().toString());
-            dvd.updateDVD(con, cmbGenero.getSelectedIndex());
-            JOptionPane.showMessageDialog(null, "Los cambios se han realizado exitosamente.", "Dato modificado", JOptionPane.WARNING_MESSAGE);
+            Dvd dvd = new Dvd(IdentificationCode, txtTitulo.getText(), availableUnits, "", txtDuracion.getText(), 1, txtDirector.getText());
+            dvd.updateDVD(con, generoMap.get(cmbGenero.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(null, "Los cambios se han realizado exitosamente.", "Dato modificado", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
         }
