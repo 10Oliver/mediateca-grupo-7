@@ -8,16 +8,21 @@ import classes.ConnectionDb;
 import classes.Artista;
 import classes.Genero;
 import classes.Cd;
+import java.awt.GridLayout;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Oliver-Dev
  */
 public class CdComponent extends javax.swing.JPanel {
+    private String IdentificationCode = "";
     private ConnectionDb con = new ConnectionDb();
     private Artista artista = new Artista();
     private Genero genero = new Genero();
@@ -37,11 +42,39 @@ public class CdComponent extends javax.swing.JPanel {
             
             btnAgregar.setVisible(false);
             btnModificar.setVisible(true);
+            do {
+                this.fillView();
+            } while (this.IdentificationCode == "");
         }
         this.fillArista();
         this.fillGenero();
     }
     
+    private void fillView() {
+        JPanel optionPanel = new JPanel(new GridLayout(2, 1));
+        JTextField txtIdentificationCode = new JTextField();
+        optionPanel.add(new JLabel("Escribe el código de identificación:"));
+        optionPanel.add(txtIdentificationCode);
+        JOptionPane.showConfirmDialog(null, optionPanel, "Ingrese los datos", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        // Check if input is empty
+        if (txtIdentificationCode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debes de ingresar un código.", "Existen campos vacíos", JOptionPane.INFORMATION_MESSAGE);
+        }
+        // Search for specific dvd
+        Cd cd = new Cd(txtIdentificationCode.getText());
+        Cd cdSelected = cd.selectCD(con);
+        if (cdSelected == null) {
+            JOptionPane.showMessageDialog(null, "No existe ningún dvd con el código proporcionado.", "Registro inexistente", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        txtTitulo.setText(cdSelected.getTitulo());
+        txtUnidadesDisponibles.setText(String.valueOf(cdSelected.getUnidadesDisponibles()));
+        txtDuracion.setText(cdSelected.getDuracion());
+        txtNumCanciones.setText(String.valueOf(cdSelected.getNum_canciones()));
+        cmbGenero.setSelectedItem(cdSelected.getGenero());
+        cmbArtista.setSelectedItem(cdSelected.getArtista());
+        IdentificationCode = txtIdentificationCode.getText();
+    }
     private void fillArista() {
         cmbArtista.removeAllItems();
         List<Artista> artistaList = artista.seleccionarTodosArtistas(con);
@@ -275,8 +308,6 @@ public class CdComponent extends javax.swing.JPanel {
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
         int availableUnits = 0;
         int numCanciones = 0;
-        int duracion = 0;
-        this.con.getConnection();
         if (this.checkFields()) {
             JOptionPane.showMessageDialog(null, "Se deben de llenar todos los campos antes de guardar la revista.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
             return;
@@ -288,11 +319,6 @@ public class CdComponent extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
         }
         try {
-            duracion = Integer.parseInt(txtDuracion.getText());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "La duración debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
-        }
-        try {
             numCanciones = Integer.parseInt(txtNumCanciones.getText());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "El número de canciones debe ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
@@ -302,7 +328,7 @@ public class CdComponent extends javax.swing.JPanel {
             Cd cd = new Cd();
             // Set values
             cd.setTitulo(txtTitulo.getText());
-            cd.setDuracion(String.valueOf(duracion) + "mins");
+            cd.setDuracion(txtDuracion.getText());
             cd.setNum_canciones(numCanciones);
             cd.setUnidadesDisponibles(availableUnits);
             // Insert cd
@@ -315,7 +341,34 @@ public class CdComponent extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        // TODO add your handling code here:
+        int availableUnits = 0;
+        int numCanciones = 0;
+        if (this.checkFields()) {
+            JOptionPane.showMessageDialog(null, "Se deben de llenar todos los campos antes de guardar la revista.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        // Check conversion
+        try {
+            availableUnits = Integer.parseInt(txtUnidadesDisponibles.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La cantidad de unidades disponibles debe de ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            numCanciones = Integer.parseInt(txtNumCanciones.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El número de canciones debe ser un número.", "Dato incorrecto", JOptionPane.WARNING_MESSAGE);
+        }
+        try {
+            Cd cd = new Cd(IdentificationCode);
+            cd.setTitulo(txtTitulo.getText());
+            cd.setDuracion(txtDuracion.getText());
+            cd.setNum_canciones(numCanciones);
+            cd.setUnidadesDisponibles(availableUnits);
+            cd.updateCD(con, artistaMap.get(cmbArtista.getSelectedItem().toString()), generoMap.get(cmbGenero.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(null, "El CD se ha actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error al actualizar", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
