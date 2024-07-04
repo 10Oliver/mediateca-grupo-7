@@ -42,7 +42,7 @@ public class MaterialOptions extends javax.swing.JPanel {
                 break;
             // Delete material
             case 3:
-                DeleteMaterial deleteMaterial = new DeleteMaterial(materialChoose);
+                DeleteMaterial deleteMaterial = new DeleteMaterial(materialChoose, mainPanel);
                 deleteMaterial.setSize(1024, 720);
                 mainPanel.add(deleteMaterial);
                 break;

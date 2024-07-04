@@ -5,6 +5,12 @@
  */
 package views;
 
+import components.BookComponent;
+import components.CdComponent;
+import components.DvdComponent;
+import components.MegazineComponent;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Oliver
@@ -19,23 +25,35 @@ public class AddMaterial extends javax.swing.JPanel {
     public AddMaterial(int materialOption) {
         this.material = materialOption;
         initComponents();
-        // Delete this when you start working
-        switch (this.material) {
+        switch (materialOption) {
             case 1:
-                lblMaterial.setText("Material seleccionado: Libro");
+                BookComponent book = new BookComponent(1);
+                this.setLayout(book);
                 break;
             case 2:
-                lblMaterial.setText("Material seleccionado: Revista");
+                MegazineComponent megazine = new MegazineComponent(1);
+                this.setLayout(megazine);
                 break;
             case 3:
-                lblMaterial.setText("Material seleccionado: CD");
+                CdComponent cd = new CdComponent(1);
+                this.setLayout(cd);
                 break;
             case 4:
-                lblMaterial.setText("Material seleccionado: DVD");
+                DvdComponent dvd = new DvdComponent(1);
+                this.setLayout(dvd);
                 break;
         }
+        
     }
-
+    
+    private void setLayout(JPanel layout) {
+        layout.setSize(1024, 658);
+        layout.setVisible(true);
+        pnlContainer.removeAll();
+        pnlContainer.add(layout);
+        pnlContainer.revalidate();
+        pnlContainer.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,44 +63,54 @@ public class AddMaterial extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
-        lblMaterial = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lblTitile = new javax.swing.JLabel();
+        pnlContainer = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(255, 245, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1024, 720));
 
-        lblTitle.setText("Agregar material");
+        jPanel1.setBackground(new java.awt.Color(140, 214, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(190, 29));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        lblMaterial.setText("jLabel1");
+        lblTitile.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblTitile.setText("Agregar material");
+        jPanel1.add(lblTitile, new java.awt.GridBagConstraints());
+
+        pnlContainer.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlContainerLayout = new javax.swing.GroupLayout(pnlContainer);
+        pnlContainer.setLayout(pnlContainerLayout);
+        pnlContainerLayout.setHorizontalGroup(
+            pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlContainerLayout.setVerticalGroup(
+            pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 658, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(407, 407, 407)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(473, 473, 473)
-                        .addComponent(lblMaterial)))
-                .addContainerGap(510, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+            .addComponent(pnlContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(lblTitle)
-                .addGap(83, 83, 83)
-                .addComponent(lblMaterial)
-                .addContainerGap(468, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pnlContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblMaterial;
-    private javax.swing.JLabel lblTitle;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblTitile;
+    private javax.swing.JPanel pnlContainer;
     // End of variables declaration//GEN-END:variables
 }
